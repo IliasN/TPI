@@ -119,6 +119,42 @@ namespace SoundStream
             return output;
         }
 
+        public List<Playlist> GetPlaylists(int pId)
+        {
+            List<Playlist> output = new List<Playlist>();
+            if (IsConnected())
+            {
+                MySqlCommand cmd = new MySqlCommand("SELECT namePlaylist,idMusic FROM contain,playlists WHERE playlists.idUser = @id AND contain.idPlaylist = playlists.idPlaylist;", this.Connection);
+                cmd.Parameters.AddWithValue("@id", pId.ToString());
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    output.Add(new Playlist(reader[0].ToString(), Convert.ToInt32(reader[1])));
+                }
+                reader.Close();
+            }
+            return output;
+        }
+
+        public List<int> GetFavorites(int pId)
+        {
+            List<int> output = new List<int>();
+            if (IsConnected())
+            {
+                MySqlCommand cmd = new MySqlCommand("SELECT idMusic FROM favorites WHERE idUser = @id", this.Connection);
+                cmd.Parameters.AddWithValue("@id", pId.ToString());
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    output.Add(Convert.ToInt32(reader[0]));
+                }
+                reader.Close();
+            }
+            return output;
+        }
+
         /// <summary>
         /// Check if the connexion to the database is open
         /// </summary>

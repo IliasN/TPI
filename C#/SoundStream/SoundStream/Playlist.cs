@@ -10,7 +10,7 @@ namespace SoundStream
     {
         #region Fields
         private string _name;
-        private List<int> _musics;
+        private int _musics;
         #endregion
 
         #region Properties
@@ -27,7 +27,7 @@ namespace SoundStream
             }
         }
 
-        public List<int> Musics
+        public int Musics
         {
             get
             {
@@ -44,7 +44,7 @@ namespace SoundStream
         #region Methods
 
         #region Constructor
-        public Playlist(string pName, List<int> pMusics)
+        public Playlist(string pName, int pMusics)
         {
             this.Name = pName;
             this.Musics = pMusics;

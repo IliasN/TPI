@@ -62,9 +62,10 @@ namespace SoundStream
         {
             if (btnAccept.Text == "Connexion")
             {
-                if (this.Database.TestConnection(tbxName.Text, PasswordHash(tbxPass.Text)) != null)
+                User testUser = this.Database.TestConnection(tbxName.Text, PasswordHash(tbxPass.Text));
+                if (testUser != null)
                 {
-                    frmMain mainWindow = new frmMain(this.Database);
+                    frmMain mainWindow = new frmMain(this.Database,testUser);
                     this.Hide();
                     mainWindow.ShowDialog();
                     return;

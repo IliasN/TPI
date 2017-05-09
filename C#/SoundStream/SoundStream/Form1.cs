@@ -15,9 +15,10 @@ namespace SoundStream
         #region Fields
         private Db _database;
         private List<MusicData> _musics;
-        private List<MusicData> _favorites;
+        private List<int> _favorites;
         private List<Playlist> _playlists;
         private Music _player;
+        private User _user;
         #endregion
 
         #region Properties
@@ -47,7 +48,7 @@ namespace SoundStream
             }
         }
 
-        public List<MusicData> Favorites
+        public List<int> Favorites
         {
             get
             {
@@ -85,23 +86,44 @@ namespace SoundStream
                 _player = value;
             }
         }
+
+        public User User
+        {
+            get
+            {
+                return _user;
+            }
+
+            set
+            {
+                this._user = value;
+            }
+        }
         #endregion
 
         #region Methods
 
         #region Constructor
-        public frmMain(Db pDatabase)
+        public frmMain(Db pDatabase,User pUser)
         {
             InitializeComponent();
             this.Database = pDatabase;
+            this.User = pUser;
             this.Player = new Music();
-            this.Musics = this.Database.GetMusics();
+            UpdateData();
         }
         #endregion
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void UpdateData()
+        {
+            this.Musics = this.Database.GetMusics();
+            this.Playlists = this.Database.GetPlaylists(this.User.Id);
+            this.Favorites = this.Database.GetFavorites(this.User.Id);
         }
 
         #endregion
