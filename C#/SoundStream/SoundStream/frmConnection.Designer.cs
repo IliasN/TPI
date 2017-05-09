@@ -61,9 +61,10 @@
             this.btnAccept.Location = new System.Drawing.Point(194, 248);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(105, 39);
-            this.btnAccept.TabIndex = 2;
+            this.btnAccept.TabIndex = 4;
             this.btnAccept.Text = "Connexion";
             this.btnAccept.UseVisualStyleBackColor = true;
+            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
             // llblSwitch
             // 
@@ -100,7 +101,7 @@
             this.tbxPass.Name = "tbxPass";
             this.tbxPass.PasswordChar = '*';
             this.tbxPass.Size = new System.Drawing.Size(384, 20);
-            this.tbxPass.TabIndex = 5;
+            this.tbxPass.TabIndex = 1;
             // 
             // lblConfirmPass
             // 
@@ -118,7 +119,7 @@
             this.tbxConfPass.Name = "tbxConfPass";
             this.tbxConfPass.PasswordChar = '*';
             this.tbxConfPass.Size = new System.Drawing.Size(384, 20);
-            this.tbxConfPass.TabIndex = 7;
+            this.tbxConfPass.TabIndex = 2;
             this.tbxConfPass.Visible = false;
             // 
             // frmConnection

@@ -91,6 +91,17 @@ namespace SoundStream
             return currentUser;
         }
 
+        public void CreateAccount(string pseudo, string pass)
+        {
+            if (IsConnected())
+            {
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO users (pseudoUser,passUser,privilegesUser) VALUES (@pseudo,@pass,0)", this.Connection);
+                cmd.Parameters.AddWithValue("@pseudo", pseudo.ToString());
+                cmd.Parameters.AddWithValue("@pass", pass.ToString());
+                cmd.ExecuteNonQuery();
+            }
+        }
+
         /// <summary>
         /// Check if the connexion to the database is open
         /// </summary>
