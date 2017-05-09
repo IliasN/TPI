@@ -28,23 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbxName = new System.Windows.Forms.TextBox();
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnAccept = new System.Windows.Forms.Button();
             this.llblSwitch = new System.Windows.Forms.LinkLabel();
             this.lblName = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.tbxPass = new System.Windows.Forms.TextBox();
+            this.lblConfirmPass = new System.Windows.Forms.Label();
+            this.tbxConfPass = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // textBox1
+            // tbxName
             // 
-            this.textBox1.Location = new System.Drawing.Point(55, 104);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(384, 20);
-            this.textBox1.TabIndex = 0;
+            this.tbxName.Location = new System.Drawing.Point(55, 104);
+            this.tbxName.Name = "tbxName";
+            this.tbxName.Size = new System.Drawing.Size(384, 20);
+            this.tbxName.TabIndex = 0;
             // 
             // lblTitle
             // 
@@ -94,32 +94,32 @@
             this.lblPassword.TabIndex = 6;
             this.lblPassword.Text = "Mot de passe :";
             // 
-            // textBox2
+            // tbxPass
             // 
-            this.textBox2.Location = new System.Drawing.Point(55, 149);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.PasswordChar = '*';
-            this.textBox2.Size = new System.Drawing.Size(384, 20);
-            this.textBox2.TabIndex = 5;
+            this.tbxPass.Location = new System.Drawing.Point(55, 149);
+            this.tbxPass.Name = "tbxPass";
+            this.tbxPass.PasswordChar = '*';
+            this.tbxPass.Size = new System.Drawing.Size(384, 20);
+            this.tbxPass.TabIndex = 5;
             // 
-            // label1
+            // lblConfirmPass
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(180, 184);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(134, 13);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Confirmer le mot de passe :";
-            this.label1.Visible = false;
+            this.lblConfirmPass.AutoSize = true;
+            this.lblConfirmPass.Location = new System.Drawing.Point(180, 184);
+            this.lblConfirmPass.Name = "lblConfirmPass";
+            this.lblConfirmPass.Size = new System.Drawing.Size(134, 13);
+            this.lblConfirmPass.TabIndex = 8;
+            this.lblConfirmPass.Text = "Confirmer le mot de passe :";
+            this.lblConfirmPass.Visible = false;
             // 
-            // textBox3
+            // tbxConfPass
             // 
-            this.textBox3.Location = new System.Drawing.Point(55, 200);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.PasswordChar = '*';
-            this.textBox3.Size = new System.Drawing.Size(384, 20);
-            this.textBox3.TabIndex = 7;
-            this.textBox3.Visible = false;
+            this.tbxConfPass.Location = new System.Drawing.Point(55, 200);
+            this.tbxConfPass.Name = "tbxConfPass";
+            this.tbxConfPass.PasswordChar = '*';
+            this.tbxConfPass.Size = new System.Drawing.Size(384, 20);
+            this.tbxConfPass.TabIndex = 7;
+            this.tbxConfPass.Visible = false;
             // 
             // frmConnection
             // 
@@ -127,15 +127,15 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(493, 304);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.lblConfirmPass);
+            this.Controls.Add(this.tbxConfPass);
             this.Controls.Add(this.lblPassword);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.tbxPass);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.llblSwitch);
             this.Controls.Add(this.btnAccept);
             this.Controls.Add(this.lblTitle);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbxName);
             this.Name = "frmConnection";
             this.Text = "SoundStream";
             this.ResumeLayout(false);
@@ -145,14 +145,14 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbxName;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Button btnAccept;
         private System.Windows.Forms.LinkLabel llblSwitch;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblPassword;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox tbxPass;
+        private System.Windows.Forms.Label lblConfirmPass;
+        private System.Windows.Forms.TextBox tbxConfPass;
     }
 }

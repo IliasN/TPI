@@ -19,7 +19,8 @@ namespace SoundStream
 
         private void llblSwitch_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            
+            tbxConfPass.Visible = !tbxConfPass.Visible;
+            lblConfirmPass.Visible = !lblConfirmPass.Visible;
         }
     }
 }
