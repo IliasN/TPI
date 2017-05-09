@@ -11,7 +11,7 @@ namespace SoundStream
     /// <summary>
     /// La classe BDD sert à se connecter à la base de données et à executer des requetes
     /// </summary>
-    public class BDD
+    public class Db
     {
         #region Fields
         private string _user;
@@ -52,7 +52,7 @@ namespace SoundStream
         #region Methods
 
         #region Constructor
-        public BDD(string pAdress, string pUser,string pPass,string pDatabase)
+        public Db(string pAdress, string pUser,string pPass,string pDatabase)
         {
             this.Connection = null;
             this.Adress = pAdress;
@@ -100,6 +100,23 @@ namespace SoundStream
                 cmd.Parameters.AddWithValue("@pass", pass.ToString());
                 cmd.ExecuteNonQuery();
             }
+        }
+
+        public List<MusicData> GetMusics()
+        {
+            List<MusicData> output = new List<MusicData>();
+            if (IsConnected())
+            {
+                MySqlCommand cmd = new MySqlCommand("SELECT idMusic,titleMusic,labelType,fileName,nameArtist FROM musics,artists,types WHERE musics.idArtist = artists.idArtist AND musics.idType = types.idType;", this.Connection);
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    output.Add(new MusicData(Convert.ToInt32(reader[0]),reader[1].ToString(),reader[2].ToString(),reader[3].ToString(),reader[4].ToString()));
+                }
+                reader.Close();
+            }
+            return output;
         }
 
         /// <summary>

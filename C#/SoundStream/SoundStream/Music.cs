@@ -10,7 +10,7 @@ namespace SoundStream
     /// <summary>
     /// La classe musique sert à créer un lecteur et à lire la musique depuis un URL http
     /// </summary>
-    public class Musique
+    public class Music
     {
         #region Fields
         private WindowsMediaPlayer _player;
@@ -28,7 +28,7 @@ namespace SoundStream
         #region Methods
 
         #region Constructor
-        public Musique()
+        public Music()
         {
             this.Player = new WindowsMediaPlayer();
             this.SetVolume(50);

@@ -30,13 +30,22 @@
         {
             this.tcMain = new System.Windows.Forms.TabControl();
             this.tpMusic = new System.Windows.Forms.TabPage();
+            this.cmbPlaylistToAdd = new System.Windows.Forms.ComboBox();
+            this.btnAddToPlaylist = new System.Windows.Forms.Button();
             this.btnAddFavorites = new System.Windows.Forms.Button();
             this.lsbMusiques = new System.Windows.Forms.ListBox();
             this.lblSearch = new System.Windows.Forms.Label();
             this.tbxSearch = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.tpFavorites = new System.Windows.Forms.TabPage();
+            this.btnRemoveFav = new System.Windows.Forms.Button();
+            this.lsbFavorites = new System.Windows.Forms.ListBox();
             this.tpPlaylists = new System.Windows.Forms.TabPage();
+            this.btnCreatePlaylist = new System.Windows.Forms.Button();
+            this.btnDelFromPlaylist = new System.Windows.Forms.Button();
+            this.lblPlaylist = new System.Windows.Forms.Label();
+            this.cmbPlaylist = new System.Windows.Forms.ComboBox();
+            this.lsbPlaylist = new System.Windows.Forms.ListBox();
             this.btnPlay = new System.Windows.Forms.Button();
             this.btnPause = new System.Windows.Forms.Button();
             this.tbVolume = new System.Windows.Forms.TrackBar();
@@ -45,15 +54,6 @@
             this.lblTimeMax = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
             this.lblVolumeValue = new System.Windows.Forms.Label();
-            this.lsbFavorites = new System.Windows.Forms.ListBox();
-            this.btnRemoveFav = new System.Windows.Forms.Button();
-            this.lsbPlaylist = new System.Windows.Forms.ListBox();
-            this.cmbPlaylist = new System.Windows.Forms.ComboBox();
-            this.lblPlaylist = new System.Windows.Forms.Label();
-            this.btnDelFromPlaylist = new System.Windows.Forms.Button();
-            this.btnAddToPlaylist = new System.Windows.Forms.Button();
-            this.cmbPlaylistToAdd = new System.Windows.Forms.ComboBox();
-            this.btnCreatePlaylist = new System.Windows.Forms.Button();
             this.tcMain.SuspendLayout();
             this.tpMusic.SuspendLayout();
             this.tpFavorites.SuspendLayout();
@@ -89,6 +89,25 @@
             this.tpMusic.TabIndex = 0;
             this.tpMusic.Text = "Musiques";
             this.tpMusic.UseVisualStyleBackColor = true;
+            // 
+            // cmbPlaylistToAdd
+            // 
+            this.cmbPlaylistToAdd.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPlaylistToAdd.FormattingEnabled = true;
+            this.cmbPlaylistToAdd.Location = new System.Drawing.Point(246, 408);
+            this.cmbPlaylistToAdd.Name = "cmbPlaylistToAdd";
+            this.cmbPlaylistToAdd.Size = new System.Drawing.Size(151, 21);
+            this.cmbPlaylistToAdd.TabIndex = 15;
+            // 
+            // btnAddToPlaylist
+            // 
+            this.btnAddToPlaylist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddToPlaylist.Location = new System.Drawing.Point(126, 402);
+            this.btnAddToPlaylist.Name = "btnAddToPlaylist";
+            this.btnAddToPlaylist.Size = new System.Drawing.Size(114, 31);
+            this.btnAddToPlaylist.TabIndex = 14;
+            this.btnAddToPlaylist.Text = "Ajouter à la playlist :";
+            this.btnAddToPlaylist.UseVisualStyleBackColor = true;
             // 
             // btnAddFavorites
             // 
@@ -146,6 +165,24 @@
             this.tpFavorites.Text = "Favoris";
             this.tpFavorites.UseVisualStyleBackColor = true;
             // 
+            // btnRemoveFav
+            // 
+            this.btnRemoveFav.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRemoveFav.Location = new System.Drawing.Point(6, 396);
+            this.btnRemoveFav.Name = "btnRemoveFav";
+            this.btnRemoveFav.Size = new System.Drawing.Size(119, 37);
+            this.btnRemoveFav.TabIndex = 9;
+            this.btnRemoveFav.Text = "Supprimer favori";
+            this.btnRemoveFav.UseVisualStyleBackColor = true;
+            // 
+            // lsbFavorites
+            // 
+            this.lsbFavorites.FormattingEnabled = true;
+            this.lsbFavorites.Location = new System.Drawing.Point(6, 6);
+            this.lsbFavorites.Name = "lsbFavorites";
+            this.lsbFavorites.Size = new System.Drawing.Size(949, 381);
+            this.lsbFavorites.TabIndex = 1;
+            // 
             // tpPlaylists
             // 
             this.tpPlaylists.Controls.Add(this.btnCreatePlaylist);
@@ -160,6 +197,52 @@
             this.tpPlaylists.TabIndex = 2;
             this.tpPlaylists.Text = "Playlists";
             this.tpPlaylists.UseVisualStyleBackColor = true;
+            // 
+            // btnCreatePlaylist
+            // 
+            this.btnCreatePlaylist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCreatePlaylist.Location = new System.Drawing.Point(826, 398);
+            this.btnCreatePlaylist.Name = "btnCreatePlaylist";
+            this.btnCreatePlaylist.Size = new System.Drawing.Size(129, 35);
+            this.btnCreatePlaylist.TabIndex = 10;
+            this.btnCreatePlaylist.Text = "Créer une playlist";
+            this.btnCreatePlaylist.UseVisualStyleBackColor = true;
+            // 
+            // btnDelFromPlaylist
+            // 
+            this.btnDelFromPlaylist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelFromPlaylist.Location = new System.Drawing.Point(7, 398);
+            this.btnDelFromPlaylist.Name = "btnDelFromPlaylist";
+            this.btnDelFromPlaylist.Size = new System.Drawing.Size(129, 35);
+            this.btnDelFromPlaylist.TabIndex = 9;
+            this.btnDelFromPlaylist.Text = "Supprimer de la playlist";
+            this.btnDelFromPlaylist.UseVisualStyleBackColor = true;
+            // 
+            // lblPlaylist
+            // 
+            this.lblPlaylist.AutoSize = true;
+            this.lblPlaylist.Location = new System.Drawing.Point(16, 13);
+            this.lblPlaylist.Name = "lblPlaylist";
+            this.lblPlaylist.Size = new System.Drawing.Size(45, 13);
+            this.lblPlaylist.TabIndex = 2;
+            this.lblPlaylist.Text = "Playlist :";
+            // 
+            // cmbPlaylist
+            // 
+            this.cmbPlaylist.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPlaylist.FormattingEnabled = true;
+            this.cmbPlaylist.Location = new System.Drawing.Point(67, 10);
+            this.cmbPlaylist.Name = "cmbPlaylist";
+            this.cmbPlaylist.Size = new System.Drawing.Size(151, 21);
+            this.cmbPlaylist.TabIndex = 1;
+            // 
+            // lsbPlaylist
+            // 
+            this.lsbPlaylist.FormattingEnabled = true;
+            this.lsbPlaylist.Location = new System.Drawing.Point(7, 37);
+            this.lsbPlaylist.Name = "lsbPlaylist";
+            this.lsbPlaylist.Size = new System.Drawing.Size(948, 355);
+            this.lsbPlaylist.TabIndex = 0;
             // 
             // btnPlay
             // 
@@ -235,89 +318,6 @@
             this.lblVolumeValue.TabIndex = 8;
             this.lblVolumeValue.Text = "50";
             // 
-            // lsbFavorites
-            // 
-            this.lsbFavorites.FormattingEnabled = true;
-            this.lsbFavorites.Location = new System.Drawing.Point(6, 6);
-            this.lsbFavorites.Name = "lsbFavorites";
-            this.lsbFavorites.Size = new System.Drawing.Size(949, 381);
-            this.lsbFavorites.TabIndex = 1;
-            // 
-            // btnRemoveFav
-            // 
-            this.btnRemoveFav.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRemoveFav.Location = new System.Drawing.Point(6, 396);
-            this.btnRemoveFav.Name = "btnRemoveFav";
-            this.btnRemoveFav.Size = new System.Drawing.Size(119, 37);
-            this.btnRemoveFav.TabIndex = 9;
-            this.btnRemoveFav.Text = "Supprimer favori";
-            this.btnRemoveFav.UseVisualStyleBackColor = true;
-            // 
-            // lsbPlaylist
-            // 
-            this.lsbPlaylist.FormattingEnabled = true;
-            this.lsbPlaylist.Location = new System.Drawing.Point(7, 37);
-            this.lsbPlaylist.Name = "lsbPlaylist";
-            this.lsbPlaylist.Size = new System.Drawing.Size(948, 355);
-            this.lsbPlaylist.TabIndex = 0;
-            // 
-            // cmbPlaylist
-            // 
-            this.cmbPlaylist.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbPlaylist.FormattingEnabled = true;
-            this.cmbPlaylist.Location = new System.Drawing.Point(67, 10);
-            this.cmbPlaylist.Name = "cmbPlaylist";
-            this.cmbPlaylist.Size = new System.Drawing.Size(151, 21);
-            this.cmbPlaylist.TabIndex = 1;
-            // 
-            // lblPlaylist
-            // 
-            this.lblPlaylist.AutoSize = true;
-            this.lblPlaylist.Location = new System.Drawing.Point(16, 13);
-            this.lblPlaylist.Name = "lblPlaylist";
-            this.lblPlaylist.Size = new System.Drawing.Size(45, 13);
-            this.lblPlaylist.TabIndex = 2;
-            this.lblPlaylist.Text = "Playlist :";
-            // 
-            // btnDelFromPlaylist
-            // 
-            this.btnDelFromPlaylist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelFromPlaylist.Location = new System.Drawing.Point(7, 398);
-            this.btnDelFromPlaylist.Name = "btnDelFromPlaylist";
-            this.btnDelFromPlaylist.Size = new System.Drawing.Size(129, 35);
-            this.btnDelFromPlaylist.TabIndex = 9;
-            this.btnDelFromPlaylist.Text = "Supprimer de la playlist";
-            this.btnDelFromPlaylist.UseVisualStyleBackColor = true;
-            // 
-            // btnAddToPlaylist
-            // 
-            this.btnAddToPlaylist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddToPlaylist.Location = new System.Drawing.Point(126, 402);
-            this.btnAddToPlaylist.Name = "btnAddToPlaylist";
-            this.btnAddToPlaylist.Size = new System.Drawing.Size(114, 31);
-            this.btnAddToPlaylist.TabIndex = 14;
-            this.btnAddToPlaylist.Text = "Ajouter à la playlist :";
-            this.btnAddToPlaylist.UseVisualStyleBackColor = true;
-            // 
-            // cmbPlaylistToAdd
-            // 
-            this.cmbPlaylistToAdd.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbPlaylistToAdd.FormattingEnabled = true;
-            this.cmbPlaylistToAdd.Location = new System.Drawing.Point(246, 408);
-            this.cmbPlaylistToAdd.Name = "cmbPlaylistToAdd";
-            this.cmbPlaylistToAdd.Size = new System.Drawing.Size(151, 21);
-            this.cmbPlaylistToAdd.TabIndex = 15;
-            // 
-            // btnCreatePlaylist
-            // 
-            this.btnCreatePlaylist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCreatePlaylist.Location = new System.Drawing.Point(826, 398);
-            this.btnCreatePlaylist.Name = "btnCreatePlaylist";
-            this.btnCreatePlaylist.Size = new System.Drawing.Size(129, 35);
-            this.btnCreatePlaylist.TabIndex = 10;
-            this.btnCreatePlaylist.Text = "Créer une playlist";
-            this.btnCreatePlaylist.UseVisualStyleBackColor = true;
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -335,6 +335,7 @@
             this.Controls.Add(this.tcMain);
             this.Name = "frmMain";
             this.Text = "SoundStream";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.tcMain.ResumeLayout(false);
             this.tpMusic.ResumeLayout(false);
             this.tpMusic.PerformLayout();

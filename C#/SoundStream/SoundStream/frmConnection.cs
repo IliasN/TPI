@@ -14,11 +14,11 @@ namespace SoundStream
     public partial class frmConnection : Form
     {
         #region Fields$
-        private BDD _database;
+        private Db _database;
         #endregion
 
         #region Properties
-        public BDD Database
+        public Db Database
         {
             get
             {
@@ -38,7 +38,7 @@ namespace SoundStream
         public frmConnection()
         {
             InitializeComponent();
-            this.Database = new BDD("127.0.0.1", "root", "", "tpi");
+            this.Database = new Db("127.0.0.1", "root", "", "tpi");
         }
         #endregion
 
@@ -64,12 +64,20 @@ namespace SoundStream
             {
                 if (this.Database.TestConnection(tbxName.Text, PasswordHash(tbxPass.Text)) != null)
                 {
-                    MessageBox.Show("Connexion reussie");
+                    frmMain mainWindow = new frmMain(this.Database);
+                    this.Hide();
+                    mainWindow.ShowDialog();
+                    return;
                 }
+            }
+            if (tbxName.Text != "" && tbxPass.Text != "" && tbxConfPass.Text != "" && tbxConfPass.Text == tbxPass.Text && btnAccept.Text == "Inscription" && this.Database.TestConnection(tbxName.Text, PasswordHash(tbxPass.Text)) == null)
+            {
+                this.Database.CreateAccount(tbxName.Text, PasswordHash(tbxPass.Text));
+                MessageBox.Show("Votre compte a bien été crée");
             }
             else
             {
-
+                MessageBox.Show("Votre compte n'a pas pu être crée.");
             }
         }
 
