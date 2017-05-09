@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using MySql;
 
-namespace MiniTPI
+namespace SoundStream
 {
     /// <summary>
     /// La classe BDD sert à se connecter à la base de données et à executer des requetes
@@ -72,36 +72,32 @@ namespace MiniTPI
         }
         #endregion
 
-        /// <summary>
-        /// Effectue une requete dans la base de données puis retourne le resultat
-        /// </summary>
-        /// <param name="pQuery">La requete SQL</param>
-        /// <returns>Une liste de résultats</returns>
-        public List<string[]> Query(string pQuery)
+        public User TestConnection(string pseudo ,string pass)
         {
-            if (this.Connection.State == System.Data.ConnectionState.Open)
+            User currentUser = null;
+            if (IsConnected())
             {
-                List<string[]> data = new List<string[]>();
-                string query = pQuery;
-                MySqlCommand cmd = new MySqlCommand(query, this.Connection);
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM users WHERE pseudoUser = @pseudo AND passUser = @pass", this.Connection);
+                cmd.Parameters.AddWithValue("@pseudo", pseudo.ToString());
+                cmd.Parameters.AddWithValue("@pass", pass.ToString());
                 MySqlDataReader reader = cmd.ExecuteReader();
+
                 while (reader.Read())
                 {
-                    List<string> tmp = new List<string>();
-                    for (int i = 0; i < reader.VisibleFieldCount; i++)
-                    {
-                        tmp.Add(reader.GetValue(i).ToString());
-                    }
-                    data.Add(tmp.ToArray());
+                    currentUser = new User(Convert.ToInt32(reader[0]), reader[1].ToString());
                 }
                 reader.Close();
-                return data;
             }
-            else
-            {
-                System.Windows.Forms.MessageBox.Show("La connexion à la base de données n'est pas ouverte", "Erreur");
-                return null;
-            }
+            return currentUser;
+        }
+
+        /// <summary>
+        /// Check if the connexion to the database is open
+        /// </summary>
+        /// <returns>True if the application is connected to the database</returns>
+        private bool IsConnected()
+        {
+            return (this.Connection.State == System.Data.ConnectionState.Open);
         }
 
         /// <summary>

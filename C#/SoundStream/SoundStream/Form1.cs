@@ -12,9 +12,21 @@ namespace SoundStream
 {
     public partial class frmMain : Form
     {
+        #region Fields
+        #endregion
+
+        #region Properties
+        #endregion
+
+        #region Methods
+
+        #region Constructor
         public frmMain()
         {
             InitializeComponent();
         }
+        #endregion
+
+        #endregion
     }
 }

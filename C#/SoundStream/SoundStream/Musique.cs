@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WMPLib;
 
-namespace MiniTPI
+namespace SoundStream
 {
     /// <summary>
     /// La classe musique sert à créer un lecteur et à lire la musique depuis un URL http

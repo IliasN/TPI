@@ -12,15 +12,27 @@ namespace SoundStream
 {
     public partial class frmConnection : Form
     {
+        #region Fields
+        #endregion
+
+        #region Properties
+        #endregion
+
+        #region Methods
+
+        #region Constructor
         public frmConnection()
         {
             InitializeComponent();
         }
+        #endregion
 
         private void llblSwitch_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             tbxConfPass.Visible = !tbxConfPass.Visible;
             lblConfirmPass.Visible = !lblConfirmPass.Visible;
         }
+
+        #endregion
     }
 }
