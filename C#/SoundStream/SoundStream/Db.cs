@@ -124,13 +124,13 @@ namespace SoundStream
             List<Playlist> output = new List<Playlist>();
             if (IsConnected())
             {
-                MySqlCommand cmd = new MySqlCommand("SELECT namePlaylist,idMusic FROM contain,playlists WHERE playlists.idUser = @id AND contain.idPlaylist = playlists.idPlaylist;", this.Connection);
+                MySqlCommand cmd = new MySqlCommand("SELECT playlists.idPlaylist,namePlaylist,idMusic FROM contain,playlists WHERE playlists.idUser = @id AND contain.idPlaylist = playlists.idPlaylist;", this.Connection);
                 cmd.Parameters.AddWithValue("@id", pId.ToString());
                 MySqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    output.Add(new Playlist(reader[0].ToString(), Convert.ToInt32(reader[1])));
+                    output.Add(new Playlist(Convert.ToInt32(reader[0]), reader[1].ToString(), Convert.ToInt32(reader[2])));
                 }
                 reader.Close();
             }
