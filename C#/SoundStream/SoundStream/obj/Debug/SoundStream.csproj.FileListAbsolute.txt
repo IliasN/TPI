@@ -1,0 +1,5 @@
+C:\Users\Administrateur\Desktop\NHAIRI_TPI_2017\C#\SoundStream\SoundStream\bin\Debug\SoundStream.exe.config
+C:\Users\Administrateur\Desktop\NHAIRI_TPI_2017\C#\SoundStream\SoundStream\obj\Debug\SoundStream.csprojResolveAssemblyReference.cache
+C:\Users\Administrateur\Desktop\NHAIRI_TPI_2017\C#\SoundStream\SoundStream\obj\Debug\SoundStream.frmMain.resources
+C:\Users\Administrateur\Desktop\NHAIRI_TPI_2017\C#\SoundStream\SoundStream\obj\Debug\SoundStream.Properties.Resources.resources
+C:\Users\Administrateur\Desktop\NHAIRI_TPI_2017\C#\SoundStream\SoundStream\obj\Debug\SoundStream.csproj.GenerateResource.Cache
