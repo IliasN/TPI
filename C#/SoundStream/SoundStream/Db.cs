@@ -102,12 +102,14 @@ namespace SoundStream
             }
         }
 
-        public List<MusicData> GetMusics()
+        public List<MusicData> GetMusics(string pTitle, string pArtist)
         {
             List<MusicData> output = new List<MusicData>();
             if (IsConnected())
             {
-                MySqlCommand cmd = new MySqlCommand("SELECT idMusic,titleMusic,labelType,fileName,nameArtist FROM musics,artists,types WHERE musics.idArtist = artists.idArtist AND musics.idType = types.idType;", this.Connection);
+                MySqlCommand cmd = new MySqlCommand("SELECT idMusic,titleMusic,labelType,fileName,nameArtist FROM musics,artists,types WHERE musics.idArtist = artists.idArtist AND musics.idType = types.idType AND (musics.titleMusic = @title OR artists.nameArtist = @artist);", this.Connection);
+                cmd.Parameters.AddWithValue("@title", pTitle.ToString());
+                cmd.Parameters.AddWithValue("@artist", pArtist.ToString());
                 MySqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
@@ -119,36 +121,61 @@ namespace SoundStream
             return output;
         }
 
-        public List<Playlist> GetPlaylists(int pId)
+        public List<MusicData> GetPlaylists(int pId)
         {
-            List<Playlist> output = new List<Playlist>();
+            List<MusicData> output = new List<MusicData>();
             if (IsConnected())
             {
-                MySqlCommand cmd = new MySqlCommand("SELECT playlists.idPlaylist,namePlaylist,idMusic FROM contain,playlists WHERE playlists.idUser = @id AND contain.idPlaylist = playlists.idPlaylist;", this.Connection);
+                MySqlCommand cmd = new MySqlCommand("SELECT DISTINCT musics.idMusic,musics.titleMusic,types.labelType,musics.fileName,artists.nameArtist,playlists.namePlaylist FROM musics,favorites,contain,users,playlists,types,artists WHERE users.idUser = playlists.idUser AND contain.idPlaylist = playlists.idPlaylist AND contain.idMusic = musics.idMusic AND users.idUser = @id AND types.idType = musics.idType AND musics.idArtist = artists.idArtist", this.Connection);
                 cmd.Parameters.AddWithValue("@id", pId.ToString());
                 MySqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    output.Add(new Playlist(Convert.ToInt32(reader[0]), reader[1].ToString(), Convert.ToInt32(reader[2])));
+                    output.Add(new MusicData(Convert.ToInt32(reader[0]), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(),reader[5].ToString()));
                 }
                 reader.Close();
             }
             return output;
         }
 
-        public List<int> GetFavorites(int pId)
+        public List<MusicData> GetFavorites(int pId)
         {
-            List<int> output = new List<int>();
+            List<MusicData> output = new List<MusicData>();
             if (IsConnected())
             {
-                MySqlCommand cmd = new MySqlCommand("SELECT idMusic FROM favorites WHERE idUser = @id", this.Connection);
+                MySqlCommand cmd = new MySqlCommand("SELECT musics.idMusic,musics.titleMusic,types.labelType,musics.fileName,artists.nameArtist FROM musics,artists,types,users,favorites WHERE musics.idType = types.idType AND musics.idArtist = artists.idArtist AND users.idUser = favorites.idUser AND musics.idMusic = favorites.idMusic AND users.idUser = @id", this.Connection);
                 cmd.Parameters.AddWithValue("@id", pId.ToString());
                 MySqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    output.Add(Convert.ToInt32(reader[0]));
+                    output.Add(new MusicData(Convert.ToInt32(reader[0]), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString()));
+                }
+                reader.Close();
+            }
+            return output;
+        }
+
+        public List<string> GetAutocomplete()
+        {
+            List<string> output = new List<string>();
+            if (IsConnected())
+            {
+                MySqlCommand cmd = new MySqlCommand("SELECT DISTINCT titleMusic FROM musics", this.Connection);
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    output.Add(reader[0].ToString());
+                }
+                reader.Close();
+                cmd = new MySqlCommand("SELECT DISTINCT nameArtist FROM artists", this.Connection);
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    output.Add(reader[0].ToString());
                 }
                 reader.Close();
             }

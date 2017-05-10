@@ -63,22 +63,33 @@ namespace SoundStream
             if (btnAccept.Text == "Connexion")
             {
                 User testUser = this.Database.TestConnection(tbxName.Text, PasswordHash(tbxPass.Text));
-                if (testUser != null)
-                {
-                    frmMain mainWindow = new frmMain(this.Database,testUser);
-                    this.Hide();
-                    mainWindow.ShowDialog();
-                    return;
-                }
-            }
-            if (tbxName.Text != "" && tbxPass.Text != "" && tbxConfPass.Text != "" && tbxConfPass.Text == tbxPass.Text && btnAccept.Text == "Inscription" && this.Database.TestConnection(tbxName.Text, PasswordHash(tbxPass.Text)) == null)
-            {
-                this.Database.CreateAccount(tbxName.Text, PasswordHash(tbxPass.Text));
-                MessageBox.Show("Votre compte a bien été crée");
+                    
+                    if (testUser != null)
+                    {
+                        frmMain mainWindow = new frmMain(this.Database, testUser);
+                        this.Hide();
+                        mainWindow.ShowDialog();
+                        return;
+                    }
+                    MessageBox.Show("Impossible de se connecter vérifiez vos identifiant.");
             }
             else
             {
-                MessageBox.Show("Votre compte n'a pas pu être crée.");
+                if (tbxName.Text != "" && tbxPass.Text != "" && tbxConfPass.Text != "" && tbxConfPass.Text == tbxPass.Text && btnAccept.Text == "Inscription" && this.Database.TestConnection(tbxName.Text, PasswordHash(tbxPass.Text)) == null)
+                {
+                    this.Database.CreateAccount(tbxName.Text, PasswordHash(tbxPass.Text));
+                    MessageBox.Show("Votre compte a bien été crée");
+                    tbxConfPass.Visible = false;
+                    lblConfirmPass.Visible = false;
+                    tbxConfPass.Clear();
+                    tbxPass.Clear();
+                    btnAccept.Text = "Connexion";
+                    llblSwitch.Text = "Inscription";
+                }
+                else
+                {
+                    MessageBox.Show("Votre compte n'a pas pu être crée.");
+                }
             }
         }
 

@@ -75,10 +75,10 @@ namespace SoundStream
         /// <param name="NewState">Le nouvel état</param>
         private void Wplayer_PlayStateChange(int NewState)
         {
-            EventHandler<MyEventArgs> handler = StateChanged;
-            MyEventArgs args = new MyEventArgs();
-            args.Value = NewState;
-            handler(this,args);
+            //EventHandler<MyEventArgs> handler = StateChanged;
+            //MyEventArgs args = new MyEventArgs();
+            //args.Value = NewState;
+            //handler(this,args);
         }
 
         /// <summary>

@@ -54,6 +54,7 @@
             this.lblTimeMax = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
             this.lblVolumeValue = new System.Windows.Forms.Label();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.tcMain.SuspendLayout();
             this.tpMusic.SuspendLayout();
             this.tpFavorites.SuspendLayout();
@@ -126,6 +127,7 @@
             this.lsbMusiques.Name = "lsbMusiques";
             this.lsbMusiques.Size = new System.Drawing.Size(949, 342);
             this.lsbMusiques.TabIndex = 12;
+            this.lsbMusiques.SelectedIndexChanged += new System.EventHandler(this.lsbMusiques_SelectedIndexChanged);
             // 
             // lblSearch
             // 
@@ -138,10 +140,13 @@
             // 
             // tbxSearch
             // 
+            this.tbxSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.tbxSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.tbxSearch.Location = new System.Drawing.Point(92, 16);
             this.tbxSearch.Name = "tbxSearch";
             this.tbxSearch.Size = new System.Drawing.Size(232, 20);
             this.tbxSearch.TabIndex = 10;
+            this.tbxSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbxSearch_KeyDown);
             // 
             // btnSearch
             // 
@@ -152,6 +157,7 @@
             this.btnSearch.TabIndex = 9;
             this.btnSearch.Text = "Recherche";
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // tpFavorites
             // 
@@ -182,6 +188,7 @@
             this.lsbFavorites.Name = "lsbFavorites";
             this.lsbFavorites.Size = new System.Drawing.Size(949, 381);
             this.lsbFavorites.TabIndex = 1;
+            this.lsbFavorites.SelectedIndexChanged += new System.EventHandler(this.lsbFavorites_SelectedIndexChanged);
             // 
             // tpPlaylists
             // 
@@ -253,6 +260,7 @@
             this.btnPlay.TabIndex = 1;
             this.btnPlay.Text = "Play";
             this.btnPlay.UseVisualStyleBackColor = true;
+            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
             // btnPause
             // 
@@ -263,6 +271,7 @@
             this.btnPause.TabIndex = 2;
             this.btnPause.Text = "Pause";
             this.btnPause.UseVisualStyleBackColor = true;
+            this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
             // 
             // tbVolume
             // 
@@ -272,6 +281,7 @@
             this.tbVolume.Size = new System.Drawing.Size(104, 45);
             this.tbVolume.TabIndex = 3;
             this.tbVolume.Value = 50;
+            this.tbVolume.Scroll += new System.EventHandler(this.tbVolume_Scroll);
             // 
             // lblVolume
             // 
@@ -318,12 +328,22 @@
             this.lblVolumeValue.TabIndex = 8;
             this.lblVolumeValue.Text = "50";
             // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Location = new System.Drawing.Point(16, 537);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(12, 13);
+            this.lblTitle.TabIndex = 9;
+            this.lblTitle.Text = "/";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(993, 554);
+            this.ClientSize = new System.Drawing.Size(993, 562);
+            this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.lblVolumeValue);
             this.Controls.Add(this.lblTime);
             this.Controls.Add(this.lblTimeMax);
@@ -377,6 +397,7 @@
         private System.Windows.Forms.ComboBox cmbPlaylist;
         private System.Windows.Forms.ListBox lsbPlaylist;
         private System.Windows.Forms.Button btnCreatePlaylist;
+        private System.Windows.Forms.Label lblTitle;
     }
 }
 
