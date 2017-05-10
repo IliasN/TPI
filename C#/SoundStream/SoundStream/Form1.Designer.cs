@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tcMain = new System.Windows.Forms.TabControl();
             this.tpMusic = new System.Windows.Forms.TabPage();
             this.cmbPlaylistToAdd = new System.Windows.Forms.ComboBox();
@@ -50,17 +51,18 @@
             this.btnPause = new System.Windows.Forms.Button();
             this.tbVolume = new System.Windows.Forms.TrackBar();
             this.lblVolume = new System.Windows.Forms.Label();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.tbTime = new System.Windows.Forms.TrackBar();
             this.lblTimeMax = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
             this.lblVolumeValue = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.tmrMain = new System.Windows.Forms.Timer(this.components);
             this.tcMain.SuspendLayout();
             this.tpMusic.SuspendLayout();
             this.tpFavorites.SuspendLayout();
             this.tpPlaylists.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbVolume)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbTime)).BeginInit();
             this.SuspendLayout();
             // 
             // tcMain
@@ -242,6 +244,7 @@
             this.cmbPlaylist.Name = "cmbPlaylist";
             this.cmbPlaylist.Size = new System.Drawing.Size(151, 21);
             this.cmbPlaylist.TabIndex = 1;
+            this.cmbPlaylist.SelectedIndexChanged += new System.EventHandler(this.cmbPlaylist_SelectedIndexChanged);
             // 
             // lsbPlaylist
             // 
@@ -250,6 +253,7 @@
             this.lsbPlaylist.Name = "lsbPlaylist";
             this.lsbPlaylist.Size = new System.Drawing.Size(948, 355);
             this.lsbPlaylist.TabIndex = 0;
+            this.lsbPlaylist.SelectedIndexChanged += new System.EventHandler(this.lsbPlaylist_SelectedIndexChanged);
             // 
             // btnPlay
             // 
@@ -292,14 +296,15 @@
             this.lblVolume.TabIndex = 4;
             this.lblVolume.Text = "Volume :";
             // 
-            // trackBar1
+            // tbTime
             // 
-            this.trackBar1.Location = new System.Drawing.Point(293, 496);
-            this.trackBar1.Maximum = 100;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(447, 45);
-            this.trackBar1.TabIndex = 5;
-            this.trackBar1.Value = 50;
+            this.tbTime.Location = new System.Drawing.Point(293, 496);
+            this.tbTime.Maximum = 100;
+            this.tbTime.Name = "tbTime";
+            this.tbTime.Size = new System.Drawing.Size(447, 45);
+            this.tbTime.TabIndex = 5;
+            this.tbTime.Value = 50;
+            this.tbTime.Scroll += new System.EventHandler(this.tbTime_Scroll);
             // 
             // lblTimeMax
             // 
@@ -337,6 +342,12 @@
             this.lblTitle.TabIndex = 9;
             this.lblTitle.Text = "/";
             // 
+            // tmrMain
+            // 
+            this.tmrMain.Enabled = true;
+            this.tmrMain.Interval = 500;
+            this.tmrMain.Tick += new System.EventHandler(this.tmrMain_Tick);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -347,7 +358,7 @@
             this.Controls.Add(this.lblVolumeValue);
             this.Controls.Add(this.lblTime);
             this.Controls.Add(this.lblTimeMax);
-            this.Controls.Add(this.trackBar1);
+            this.Controls.Add(this.tbTime);
             this.Controls.Add(this.lblVolume);
             this.Controls.Add(this.tbVolume);
             this.Controls.Add(this.btnPause);
@@ -363,7 +374,7 @@
             this.tpPlaylists.ResumeLayout(false);
             this.tpPlaylists.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbVolume)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbTime)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -379,7 +390,7 @@
         private System.Windows.Forms.Button btnPause;
         private System.Windows.Forms.TrackBar tbVolume;
         private System.Windows.Forms.Label lblVolume;
-        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.TrackBar tbTime;
         private System.Windows.Forms.Label lblTimeMax;
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Label lblVolumeValue;
@@ -398,6 +409,7 @@
         private System.Windows.Forms.ListBox lsbPlaylist;
         private System.Windows.Forms.Button btnCreatePlaylist;
         private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Timer tmrMain;
     }
 }
 
