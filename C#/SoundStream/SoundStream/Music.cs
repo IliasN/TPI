@@ -14,7 +14,6 @@ namespace SoundStream
     {
         #region Fields
         private WindowsMediaPlayer _player;
-        public event EventHandler<MyEventArgs> StateChanged;
         #endregion
 
         #region Properties
@@ -32,7 +31,6 @@ namespace SoundStream
         {
             this.Player = new WindowsMediaPlayer();
             this.SetVolume(50);
-            this.Player.PlayStateChange += Wplayer_PlayStateChange;
         }
         #endregion
 
@@ -67,18 +65,6 @@ namespace SoundStream
         public void SetVolume(int value)
         {
             this.Player.settings.volume = value;
-        }
-
-        /// <summary>
-        /// Quand l'état du lecteur change renvoi l'état
-        /// </summary>
-        /// <param name="NewState">Le nouvel état</param>
-        private void Wplayer_PlayStateChange(int NewState)
-        {
-            //EventHandler<MyEventArgs> handler = StateChanged;
-            //MyEventArgs args = new MyEventArgs();
-            //args.Value = NewState;
-            //handler(this,args);
         }
 
         /// <summary>
@@ -119,16 +105,5 @@ namespace SoundStream
         }
 
         #endregion
-    }
-
-    public class MyEventArgs : EventArgs
-    {
-        private int _value;
-
-        public int Value
-        {
-            get { return _value; }
-            set { _value = value; }
-        }
     }
 }

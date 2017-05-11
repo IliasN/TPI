@@ -75,7 +75,7 @@ namespace SoundStream
             }
             else
             {
-                if (tbxName.Text.Trim() != "" && tbxPass.Text.Trim() != "" && tbxConfPass.Text.Trim() != "" && tbxConfPass.Text == tbxPass.Text && btnAccept.Text == "Inscription" && this.Database.TestConnection(tbxName.Text, PasswordHash(tbxPass.Text)) == null)
+                if (tbxName.Text.Trim() != "" && tbxPass.Text.Trim() != "" && tbxConfPass.Text.Trim() != "" && tbxConfPass.Text == tbxPass.Text && btnAccept.Text == "Inscription" && this.Database.AccountAlreadyExists(tbxName.Text) == false)
                 {
                     this.Database.CreateAccount(tbxName.Text, PasswordHash(tbxPass.Text));
                     MessageBox.Show("Votre compte a bien été crée");

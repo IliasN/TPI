@@ -72,6 +72,12 @@ namespace SoundStream
         }
         #endregion
 
+        /// <summary>
+        /// Check if the connection informations sent by the user are right
+        /// </summary>
+        /// <param name="pseudo">The username</param>
+        /// <param name="pass">The password (MD5)</param>
+        /// <returns>Null if the informations are false and return an user object if the informations are right</returns>
         public User TestConnection(string pseudo ,string pass)
         {
             User currentUser = null;
@@ -89,6 +95,28 @@ namespace SoundStream
                 reader.Close();
             }
             return currentUser;
+        }
+        /// <summary>
+        /// Check if the username is already used
+        /// </summary>
+        /// <param name="pseudo">The name to check</param>
+        /// <returns>A line if</returns>
+        public bool AccountAlreadyExists(string pseudo)
+        {
+            bool userExists = false;
+            if (IsConnected())
+            {
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM users WHERE pseudoUser = @pseudo", this.Connection);
+                cmd.Parameters.AddWithValue("@pseudo", pseudo.ToString());
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    userExists = true;
+                }
+                reader.Close();
+            }
+            return userExists;
         }
 
         public void CreateAccount(string pseudo, string pass)
@@ -182,6 +210,11 @@ namespace SoundStream
             return output;
         }
 
+        /// <summary>
+        /// Add a favorite for a user
+        /// </summary>
+        /// <param name="pIdUser">The user id</param>
+        /// <param name="pIdMusic">The music id</param>
         public void AddFavorite(int pIdUser, int pIdMusic)
         {
             if (IsConnected())
@@ -280,8 +313,6 @@ namespace SoundStream
             {
                 try
                 {
-//                    MySqlCommand cmd = new MySqlCommand("INSERT INTO playlists (namePlaylist,idUser) VALUES (@name,@idUser) WHERE NOT EXISTS (SELECT * FROM playlists WHERE namePlaylist = @name AND idUser = @idUser)", this.Connection);
-
                     MySqlCommand cmd = new MySqlCommand("INSERT INTO playlists (namePlaylist,idUser) SELECT @name,@idUser WHERE NOT EXISTS (SELECT * FROM playlists WHERE namePlaylist = @name AND idUser = @idUser)", this.Connection);
                     cmd.Parameters.AddWithValue("@name", pName);
                     cmd.Parameters.AddWithValue("@idUser", pIdUser.ToString());
