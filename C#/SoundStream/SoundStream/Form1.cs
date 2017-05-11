@@ -17,6 +17,7 @@ namespace SoundStream
         private List<MusicData> _musics;
         private List<MusicData> _favorites;
         private List<MusicData> _playlists;
+        private List<Playlist> _playlistsData;
         private List<string> _autoComplete;
         private Music _player;
         private User _user;
@@ -128,6 +129,19 @@ namespace SoundStream
                 _playingId = value;
             }
         }
+
+        public List<Playlist> PlaylistsData
+        {
+            get
+            {
+                return _playlistsData;
+            }
+
+            set
+            {
+                _playlistsData = value;
+            }
+        }
         #endregion
 
         #region Methods
@@ -152,8 +166,12 @@ namespace SoundStream
 
         private void UpdateData()
         {
+            lsbFavorites.DataSource = null;
+            lsbMusiques.DataSource = null;
+            lsbPlaylist.DataSource = null;
             //Recuperation des playlists et favoris
             this.Playlists = this.Database.GetPlaylistsMusics(this.User.Id);
+            this.PlaylistsData = this.Database.GetPlaylistsData(this.User.Id);
             this.Favorites = this.Database.GetFavorites(this.User.Id);
             //Recuperation et application de l'autocomplete pour la recherche
             this.AutoComplete = this.Database.GetAutocomplete();
@@ -169,7 +187,7 @@ namespace SoundStream
             lsbFavorites.DataSource = this.Favorites.Select(music => music.Artist + " - " + music.Title).ToList();
 
             //Recupere les noms des playlists
-            cmbPlaylist.DataSource = this.Playlists.GroupBy(m => m.Playlist).Select(grp => grp.First().Playlist).ToList();
+            cmbPlaylist.DataSource = this.PlaylistsData.Select(p => p.Name).ToList();
             cmbPlaylistToAdd.DataSource = cmbPlaylist.DataSource;
             //Empeche de lancer une musique automatiquement
             this.Player.Stop();
@@ -196,13 +214,16 @@ namespace SoundStream
 
         private void lsbMusiques_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //Recupere l'id de la music en cours
-            this.PlayingId = this.Musics.First(m => m.Artist + " - " + m.Title == lsbMusiques.Items[lsbMusiques.SelectedIndex].ToString()).Id;
-            //Charge la musique
-            this.Player.SetUrl(URL + this.Musics.First(m => m.Id == this.PlayingId).FileName);
-            //Affiche le nom de la musique
-            lblTitle.Text = lsbMusiques.Items[lsbMusiques.SelectedIndex].ToString();
-            this.Player.Play();
+            if (lsbMusiques.SelectedIndex != -1)
+            {
+                //Recupere l'id de la music en cours
+                this.PlayingId = this.Musics.First(m => m.Artist + " - " + m.Title == lsbMusiques.Items[lsbMusiques.SelectedIndex].ToString()).Id;
+                //Charge la musique
+                this.Player.SetUrl(URL + this.Musics.First(m => m.Id == this.PlayingId).FileName);
+                //Affiche le nom de la musique
+                lblTitle.Text = lsbMusiques.Items[lsbMusiques.SelectedIndex].ToString();
+                this.Player.Play();
+            }
         }
 
         private void tbVolume_Scroll(object sender, EventArgs e)
@@ -223,13 +244,16 @@ namespace SoundStream
 
         private void lsbFavorites_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //Recupere l'id de la music en cours
-            this.PlayingId = this.Favorites.First(m => m.Artist + " - " + m.Title == lsbFavorites.Items[lsbFavorites.SelectedIndex].ToString()).Id;
-            //Charge la musique
-            this.Player.SetUrl(URL + this.Favorites.First(m => m.Id == this.PlayingId).FileName);
-            //Affiche le nom de la musique
-            lblTitle.Text = lsbFavorites.Items[lsbFavorites.SelectedIndex].ToString();
-            this.Player.Play();
+            if (lsbFavorites.SelectedIndex != -1)
+            {
+                //Recupere l'id de la music en cours
+                this.PlayingId = this.Favorites.First(m => m.Artist + " - " + m.Title == lsbFavorites.Items[lsbFavorites.SelectedIndex].ToString()).Id;
+                //Charge la musique
+                this.Player.SetUrl(URL + this.Favorites.First(m => m.Id == this.PlayingId).FileName);
+                //Affiche le nom de la musique
+                lblTitle.Text = lsbFavorites.Items[lsbFavorites.SelectedIndex].ToString();
+                this.Player.Play();
+            }
         }
 
         private void cmbPlaylist_SelectedIndexChanged(object sender, EventArgs e)
@@ -269,13 +293,16 @@ namespace SoundStream
 
         private void lsbPlaylist_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //Recupere l'id de la music en cours
-            this.PlayingId = this.Playlists.First(m => m.Artist + " - " + m.Title == lsbPlaylist.Items[lsbPlaylist.SelectedIndex].ToString()).Id;
-            //Charge la musique
-            this.Player.SetUrl(URL + this.Playlists.First(m => m.Id == this.PlayingId).FileName);
-            //Affiche le nom de la musique
-            lblTitle.Text = lsbPlaylist.Items[lsbPlaylist.SelectedIndex].ToString();
-            this.Player.Play();
+            if (lsbPlaylist.SelectedIndex != -1)
+            {
+                //Recupere l'id de la music en cours
+                this.PlayingId = this.Playlists.First(m => m.Artist + " - " + m.Title == lsbPlaylist.Items[lsbPlaylist.SelectedIndex].ToString()).Id;
+                //Charge la musique
+                this.Player.SetUrl(URL + this.Playlists.First(m => m.Id == this.PlayingId).FileName);
+                //Affiche le nom de la musique
+                lblTitle.Text = lsbPlaylist.Items[lsbPlaylist.SelectedIndex].ToString();
+                this.Player.Play();
+            }
         }
 
         private void btnAddFavorites_Click(object sender, EventArgs e)
@@ -288,11 +315,58 @@ namespace SoundStream
         {
             if (cmbPlaylistToAdd.Text != "")
             {
-                this.Database.AddToPlaylist(this.Playlists.First(p => p.Playlist == cmbPlaylistToAdd.Text).IdPlaylist, this.PlayingId);
+                this.Database.AddToPlaylist(this.PlaylistsData.First(p => p.Name == cmbPlaylistToAdd.Text).Id, this.PlayingId);
                 UpdateData();
             }
             else
                 MessageBox.Show("Il faut d'abord sélectionner une playlist.");
+        }
+
+        private void btnDelFromPlaylist_Click(object sender, EventArgs e)
+        {
+            this.Database.DeleteFromPlaylist(this.PlaylistsData.First(p => p.Name == cmbPlaylist.Text).Id, this.PlayingId);
+            UpdateData();
+        }
+
+        private void btnDeletePlaylist_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Voulez vous vraiment supprimer " + cmbPlaylist.Text + " de vos playlist ?" , "Confirmation" ,MessageBoxButtons.YesNo);
+            if(result == DialogResult.Yes)
+            {
+                this.Database.DeletePlaylist(this.PlaylistsData.First(p => p.Name == cmbPlaylist.Text).Id);
+                UpdateData();
+            }
+        }
+
+        private void btnCreatePlaylist_Click(object sender, EventArgs e)
+        {
+            AddPlaylist();
+        }
+
+        private void AddPlaylist()
+        {
+            if (tbxNewPlaylist.Text.Trim() != "")
+            {
+                this.Database.CreatePlaylist(tbxNewPlaylist.Text, this.User.Id);
+                tbxNewPlaylist.Clear();
+                UpdateData();
+            }
+            else
+            {
+                MessageBox.Show("Impossible de créer une playlist avec ce nom.");
+            }
+        }
+
+        private void tbxNewPlaylist_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                AddPlaylist();
+        }
+
+        private void btnRemoveFav_Click(object sender, EventArgs e)
+        {
+            this.Database.DeleteFromFavorites(this.User.Id, this.PlayingId);
+            UpdateData();
         }
 
         #endregion

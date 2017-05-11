@@ -218,6 +218,98 @@ namespace SoundStream
             }
         }
 
+        public List<Playlist> GetPlaylistsData(int pIdUser)
+        {
+            List<Playlist> output = new List<Playlist>();
+            if (IsConnected())
+            {
+                MySqlCommand cmd = new MySqlCommand("SELECT playlists.namePlaylist,playlists.idPlaylist FROM playlists,users WHERE users.idUser = @id AND playlists.idUser = users.idUser", this.Connection);
+                cmd.Parameters.AddWithValue("@id", pIdUser.ToString());
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    output.Add(new Playlist(Convert.ToInt32(reader[1]), reader[0].ToString()));
+                }
+                reader.Close();
+            }
+            return output;
+        }
+
+        public void DeleteFromPlaylist(int pIdPlaylist,int pIdMusic)
+        {
+            if (IsConnected())
+            {
+                try
+                {
+                    MySqlCommand cmd = new MySqlCommand("DELETE FROM contain WHERE idPlaylist = @idPlaylist AND idMusic = @idMusic", this.Connection);
+                    cmd.Parameters.AddWithValue("@idPlaylist", pIdPlaylist.ToString());
+                    cmd.Parameters.AddWithValue("@idMusic", pIdMusic.ToString());
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+            }
+        }
+
+        public void DeletePlaylist(int pIdPlaylist)
+        {
+            if (IsConnected())
+            {
+                try
+                {
+                    MySqlCommand cmd = new MySqlCommand("DELETE FROM contain WHERE idPlaylist = @idPlaylist", this.Connection);
+                    cmd.Parameters.AddWithValue("@idPlaylist", pIdPlaylist.ToString());
+                    cmd.ExecuteNonQuery();
+                    cmd = new MySqlCommand("DELETE FROM playlists WHERE idPlaylist = @idPlaylist", this.Connection);
+                    cmd.Parameters.AddWithValue("@idPlaylist", pIdPlaylist.ToString());
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+            }
+        }
+
+        public void CreatePlaylist(string pName, int pIdUser)
+        {
+            if (IsConnected())
+            {
+                try
+                {
+                    MySqlCommand cmd = new MySqlCommand("INSERT INTO playlists (namePlaylist,idUser) VALUES (@name,@idUser)", this.Connection);
+                    cmd.Parameters.AddWithValue("@name", pName);
+                    cmd.Parameters.AddWithValue("@idUser", pIdUser.ToString());
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+            }
+        }
+
+        public void DeleteFromFavorites(int pIdUser,int pIdMusic)
+        {
+            if (IsConnected())
+            {
+                try
+                {
+                    MySqlCommand cmd = new MySqlCommand("DELETE FROM favorites WHERE idUser = @idUser AND idMusic = @idMusic", this.Connection);
+                    cmd.Parameters.AddWithValue("@idMusic", pIdMusic);
+                    cmd.Parameters.AddWithValue("@idUser", pIdUser.ToString());
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+            }
+        }
+
         /// <summary>
         /// Check if the connexion to the database is open
         /// </summary>
