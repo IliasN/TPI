@@ -121,18 +121,18 @@ namespace SoundStream
             return output;
         }
 
-        public List<MusicData> GetPlaylists(int pId)
+        public List<MusicData> GetPlaylistsMusics(int pId)
         {
             List<MusicData> output = new List<MusicData>();
             if (IsConnected())
             {
-                MySqlCommand cmd = new MySqlCommand("SELECT DISTINCT musics.idMusic,musics.titleMusic,types.labelType,musics.fileName,artists.nameArtist,playlists.namePlaylist FROM musics,favorites,contain,users,playlists,types,artists WHERE users.idUser = playlists.idUser AND contain.idPlaylist = playlists.idPlaylist AND contain.idMusic = musics.idMusic AND users.idUser = @id AND types.idType = musics.idType AND musics.idArtist = artists.idArtist", this.Connection);
+                MySqlCommand cmd = new MySqlCommand("SELECT DISTINCT musics.idMusic,musics.titleMusic,types.labelType,musics.fileName,artists.nameArtist,playlists.namePlaylist,playlists.idPlaylist FROM musics,favorites,contain,users,playlists,types,artists WHERE users.idUser = playlists.idUser AND contain.idPlaylist = playlists.idPlaylist AND contain.idMusic = musics.idMusic AND users.idUser = @id AND types.idType = musics.idType AND musics.idArtist = artists.idArtist", this.Connection);
                 cmd.Parameters.AddWithValue("@id", pId.ToString());
                 MySqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    output.Add(new MusicData(Convert.ToInt32(reader[0]), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(),reader[5].ToString()));
+                    output.Add(new MusicData(Convert.ToInt32(reader[0]), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(),reader[5].ToString(),Convert.ToInt32(reader[6])));
                 }
                 reader.Close();
             }
@@ -180,6 +180,42 @@ namespace SoundStream
                 reader.Close();
             }
             return output;
+        }
+
+        public void AddFavorite(int pIdUser, int pIdMusic)
+        {
+            if (IsConnected())
+            {
+                try
+                {
+                    MySqlCommand cmd = new MySqlCommand("INSERT INTO favorites (idUser,idMusic) VALUES (@idUser,@idMusic)", this.Connection);
+                    cmd.Parameters.AddWithValue("@idUser", pIdUser.ToString());
+                    cmd.Parameters.AddWithValue("@idMusic", pIdMusic.ToString());
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+            }
+        }
+
+        public void AddToPlaylist(int pIdPlaylist, int pIdMusic)
+        {
+            if (IsConnected())
+            {
+                try
+                {
+                    MySqlCommand cmd = new MySqlCommand("INSERT INTO contain (idPlaylist,idMusic) VALUES (@idPlaylist,@idMusic)", this.Connection);
+                    cmd.Parameters.AddWithValue("@idPlaylist", pIdPlaylist.ToString());
+                    cmd.Parameters.AddWithValue("@idMusic", pIdMusic.ToString());
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+            }
         }
 
         /// <summary>

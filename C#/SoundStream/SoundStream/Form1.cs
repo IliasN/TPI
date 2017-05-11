@@ -139,8 +139,9 @@ namespace SoundStream
             this.Database = pDatabase;
             this.User = pUser;
             this.Player = new Music();
+            this.PlayingId = -1;
             UpdateData();
-            this.Player.Stop();
+            
         }
         #endregion
 
@@ -152,7 +153,7 @@ namespace SoundStream
         private void UpdateData()
         {
             //Recuperation des playlists et favoris
-            this.Playlists = this.Database.GetPlaylists(this.User.Id);
+            this.Playlists = this.Database.GetPlaylistsMusics(this.User.Id);
             this.Favorites = this.Database.GetFavorites(this.User.Id);
             //Recuperation et application de l'autocomplete pour la recherche
             this.AutoComplete = this.Database.GetAutocomplete();
@@ -169,6 +170,9 @@ namespace SoundStream
 
             //Recupere les noms des playlists
             cmbPlaylist.DataSource = this.Playlists.GroupBy(m => m.Playlist).Select(grp => grp.First().Playlist).ToList();
+            cmbPlaylistToAdd.DataSource = cmbPlaylist.DataSource;
+            //Empeche de lancer une musique automatiquement
+            this.Player.Stop();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -180,6 +184,8 @@ namespace SoundStream
         {
             this.Musics = this.Database.GetMusics(tbxSearch.Text, tbxSearch.Text);
             lsbMusiques.DataSource = this.Musics.Select(music => music.Artist + " - " + music.Title).ToList();
+            tcMain.SelectedIndex = 2;
+            this.Player.Stop();
         }
 
         private void tbxSearch_KeyDown(object sender, KeyEventArgs e)
@@ -238,13 +244,27 @@ namespace SoundStream
 
         private void SetTimeBar()
         {
-            tbTime.Maximum = this.Player.GetDuration() + 1;
-            tbTime.Value = this.Player.GetCurrentPosition();
+            if (this.PlayingId != -1)
+            {
+                tbTime.Maximum = this.Player.GetDuration() + 1;
+                tbTime.Value = this.Player.GetCurrentPosition();
+                lblTimeMax.Text = SecondesToMMSS(this.Player.GetDuration());
+                lblTime.Text = SecondesToMMSS(this.Player.GetCurrentPosition());
+            }
         }
 
         private void tbTime_Scroll(object sender, EventArgs e)
         {
             this.Player.SetCurrentPosition(tbTime.Value);
+        }
+
+        private string SecondesToMMSS(int pSec)
+        {
+            int minutes = pSec / 60;
+            int secondes = pSec - ((pSec / 60) * 60);
+            if (secondes < 10)
+                return string.Format("{0}:{1}", minutes.ToString(), "0" + secondes.ToString());
+            return string.Format("{0}:{1}", minutes.ToString(), secondes.ToString());
         }
 
         private void lsbPlaylist_SelectedIndexChanged(object sender, EventArgs e)
@@ -256,6 +276,23 @@ namespace SoundStream
             //Affiche le nom de la musique
             lblTitle.Text = lsbPlaylist.Items[lsbPlaylist.SelectedIndex].ToString();
             this.Player.Play();
+        }
+
+        private void btnAddFavorites_Click(object sender, EventArgs e)
+        {
+            this.Database.AddFavorite(this.User.Id, this.PlayingId);
+            UpdateData();
+        }
+
+        private void btnAddToPlaylist_Click(object sender, EventArgs e)
+        {
+            if (cmbPlaylistToAdd.Text != "")
+            {
+                this.Database.AddToPlaylist(this.Playlists.First(p => p.Playlist == cmbPlaylistToAdd.Text).IdPlaylist, this.PlayingId);
+                UpdateData();
+            }
+            else
+                MessageBox.Show("Il faut d'abord sélectionner une playlist.");
         }
 
         #endregion

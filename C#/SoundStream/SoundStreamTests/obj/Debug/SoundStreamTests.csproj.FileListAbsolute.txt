@@ -1,0 +1,7 @@
+C:\Users\Administrateur\Desktop\NHAIRI_TPI_2017\C#\SoundStream\SoundStreamTests\bin\Debug\SoundStreamTests.dll
+C:\Users\Administrateur\Desktop\NHAIRI_TPI_2017\C#\SoundStream\SoundStreamTests\bin\Debug\SoundStreamTests.pdb
+C:\Users\Administrateur\Desktop\NHAIRI_TPI_2017\C#\SoundStream\SoundStreamTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\Administrateur\Desktop\NHAIRI_TPI_2017\C#\SoundStream\SoundStreamTests\bin\Debug\fr\Microsoft.VisualStudio.QualityTools.UnitTestFramework.resources.dll
+C:\Users\Administrateur\Desktop\NHAIRI_TPI_2017\C#\SoundStream\SoundStreamTests\obj\Debug\SoundStreamTests.csprojResolveAssemblyReference.cache
+C:\Users\Administrateur\Desktop\NHAIRI_TPI_2017\C#\SoundStream\SoundStreamTests\obj\Debug\SoundStreamTests.dll
+C:\Users\Administrateur\Desktop\NHAIRI_TPI_2017\C#\SoundStream\SoundStreamTests\obj\Debug\SoundStreamTests.pdb

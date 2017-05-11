@@ -15,6 +15,7 @@ namespace SoundStream
         private string _fileName;
         private string _artist;
         private string _playlist;
+        private int _idPlaylist;
         #endregion
 
         #region Properties
@@ -95,12 +96,25 @@ namespace SoundStream
                 _playlist = value;
             }
         }
+
+        public int IdPlaylist
+        {
+            get
+            {
+                return _idPlaylist;
+            }
+
+            set
+            {
+                _idPlaylist = value;
+            }
+        }
         #endregion
 
         #region Methods
 
         #region Constructor
-        public MusicData(int id,string title,string type,string filename,string artist,string playlist = "")
+        public MusicData(int id,string title,string type,string filename,string artist,string playlist = "",int pIdPlaylist = -1)
         {
             this.Id = id;
             this.Title = title;
@@ -108,6 +122,7 @@ namespace SoundStream
             this.FileName = filename;
             this.Artist = artist;
             this.Playlist = playlist;
+            this.IdPlaylist = pIdPlaylist;
         }
         #endregion
 

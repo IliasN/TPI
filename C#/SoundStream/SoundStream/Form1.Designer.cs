@@ -67,13 +67,13 @@
             // 
             // tcMain
             // 
-            this.tcMain.Controls.Add(this.tpMusic);
-            this.tcMain.Controls.Add(this.tpFavorites);
             this.tcMain.Controls.Add(this.tpPlaylists);
-            this.tcMain.Location = new System.Drawing.Point(12, 25);
+            this.tcMain.Controls.Add(this.tpFavorites);
+            this.tcMain.Controls.Add(this.tpMusic);
+            this.tcMain.Location = new System.Drawing.Point(12, 53);
             this.tcMain.Name = "tcMain";
             this.tcMain.SelectedIndex = 0;
-            this.tcMain.Size = new System.Drawing.Size(969, 465);
+            this.tcMain.Size = new System.Drawing.Size(969, 467);
             this.tcMain.TabIndex = 0;
             // 
             // tpMusic
@@ -82,13 +82,10 @@
             this.tpMusic.Controls.Add(this.btnAddToPlaylist);
             this.tpMusic.Controls.Add(this.btnAddFavorites);
             this.tpMusic.Controls.Add(this.lsbMusiques);
-            this.tpMusic.Controls.Add(this.lblSearch);
-            this.tpMusic.Controls.Add(this.tbxSearch);
-            this.tpMusic.Controls.Add(this.btnSearch);
             this.tpMusic.Location = new System.Drawing.Point(4, 22);
             this.tpMusic.Name = "tpMusic";
             this.tpMusic.Padding = new System.Windows.Forms.Padding(3);
-            this.tpMusic.Size = new System.Drawing.Size(961, 439);
+            this.tpMusic.Size = new System.Drawing.Size(961, 441);
             this.tpMusic.TabIndex = 0;
             this.tpMusic.Text = "Musiques";
             this.tpMusic.UseVisualStyleBackColor = true;
@@ -111,6 +108,7 @@
             this.btnAddToPlaylist.TabIndex = 14;
             this.btnAddToPlaylist.Text = "Ajouter à la playlist :";
             this.btnAddToPlaylist.UseVisualStyleBackColor = true;
+            this.btnAddToPlaylist.Click += new System.EventHandler(this.btnAddToPlaylist_Click);
             // 
             // btnAddFavorites
             // 
@@ -121,20 +119,21 @@
             this.btnAddFavorites.TabIndex = 13;
             this.btnAddFavorites.Text = "Ajouter aux favoris";
             this.btnAddFavorites.UseVisualStyleBackColor = true;
+            this.btnAddFavorites.Click += new System.EventHandler(this.btnAddFavorites_Click);
             // 
             // lsbMusiques
             // 
             this.lsbMusiques.FormattingEnabled = true;
-            this.lsbMusiques.Location = new System.Drawing.Point(6, 51);
+            this.lsbMusiques.Location = new System.Drawing.Point(6, 12);
             this.lsbMusiques.Name = "lsbMusiques";
-            this.lsbMusiques.Size = new System.Drawing.Size(949, 342);
+            this.lsbMusiques.Size = new System.Drawing.Size(949, 381);
             this.lsbMusiques.TabIndex = 12;
             this.lsbMusiques.SelectedIndexChanged += new System.EventHandler(this.lsbMusiques_SelectedIndexChanged);
             // 
             // lblSearch
             // 
             this.lblSearch.AutoSize = true;
-            this.lblSearch.Location = new System.Drawing.Point(9, 19);
+            this.lblSearch.Location = new System.Drawing.Point(536, 25);
             this.lblSearch.Name = "lblSearch";
             this.lblSearch.Size = new System.Drawing.Size(66, 13);
             this.lblSearch.TabIndex = 11;
@@ -144,7 +143,7 @@
             // 
             this.tbxSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.tbxSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.tbxSearch.Location = new System.Drawing.Point(92, 16);
+            this.tbxSearch.Location = new System.Drawing.Point(619, 22);
             this.tbxSearch.Name = "tbxSearch";
             this.tbxSearch.Size = new System.Drawing.Size(232, 20);
             this.tbxSearch.TabIndex = 10;
@@ -153,7 +152,7 @@
             // btnSearch
             // 
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Location = new System.Drawing.Point(330, 10);
+            this.btnSearch.Location = new System.Drawing.Point(857, 16);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(114, 31);
             this.btnSearch.TabIndex = 9;
@@ -168,7 +167,7 @@
             this.tpFavorites.Location = new System.Drawing.Point(4, 22);
             this.tpFavorites.Name = "tpFavorites";
             this.tpFavorites.Padding = new System.Windows.Forms.Padding(3);
-            this.tpFavorites.Size = new System.Drawing.Size(961, 439);
+            this.tpFavorites.Size = new System.Drawing.Size(961, 441);
             this.tpFavorites.TabIndex = 1;
             this.tpFavorites.Text = "Favoris";
             this.tpFavorites.UseVisualStyleBackColor = true;
@@ -202,7 +201,7 @@
             this.tpPlaylists.Location = new System.Drawing.Point(4, 22);
             this.tpPlaylists.Name = "tpPlaylists";
             this.tpPlaylists.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPlaylists.Size = new System.Drawing.Size(961, 439);
+            this.tpPlaylists.Size = new System.Drawing.Size(961, 441);
             this.tpPlaylists.TabIndex = 2;
             this.tpPlaylists.Text = "Playlists";
             this.tpPlaylists.UseVisualStyleBackColor = true;
@@ -258,7 +257,7 @@
             // btnPlay
             // 
             this.btnPlay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPlay.Location = new System.Drawing.Point(16, 493);
+            this.btnPlay.Location = new System.Drawing.Point(16, 523);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(102, 37);
             this.btnPlay.TabIndex = 1;
@@ -269,7 +268,7 @@
             // btnPause
             // 
             this.btnPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPause.Location = new System.Drawing.Point(124, 493);
+            this.btnPause.Location = new System.Drawing.Point(124, 523);
             this.btnPause.Name = "btnPause";
             this.btnPause.Size = new System.Drawing.Size(102, 37);
             this.btnPause.TabIndex = 2;
@@ -279,7 +278,7 @@
             // 
             // tbVolume
             // 
-            this.tbVolume.Location = new System.Drawing.Point(849, 496);
+            this.tbVolume.Location = new System.Drawing.Point(849, 526);
             this.tbVolume.Maximum = 100;
             this.tbVolume.Name = "tbVolume";
             this.tbVolume.Size = new System.Drawing.Size(104, 45);
@@ -290,7 +289,7 @@
             // lblVolume
             // 
             this.lblVolume.AutoSize = true;
-            this.lblVolume.Location = new System.Drawing.Point(795, 507);
+            this.lblVolume.Location = new System.Drawing.Point(795, 537);
             this.lblVolume.Name = "lblVolume";
             this.lblVolume.Size = new System.Drawing.Size(48, 13);
             this.lblVolume.TabIndex = 4;
@@ -298,7 +297,7 @@
             // 
             // tbTime
             // 
-            this.tbTime.Location = new System.Drawing.Point(293, 496);
+            this.tbTime.Location = new System.Drawing.Point(293, 526);
             this.tbTime.Maximum = 100;
             this.tbTime.Name = "tbTime";
             this.tbTime.Size = new System.Drawing.Size(447, 45);
@@ -309,7 +308,7 @@
             // lblTimeMax
             // 
             this.lblTimeMax.AutoSize = true;
-            this.lblTimeMax.Location = new System.Drawing.Point(746, 505);
+            this.lblTimeMax.Location = new System.Drawing.Point(746, 535);
             this.lblTimeMax.Name = "lblTimeMax";
             this.lblTimeMax.Size = new System.Drawing.Size(40, 13);
             this.lblTimeMax.TabIndex = 6;
@@ -318,7 +317,7 @@
             // lblTime
             // 
             this.lblTime.AutoSize = true;
-            this.lblTime.Location = new System.Drawing.Point(247, 505);
+            this.lblTime.Location = new System.Drawing.Point(247, 535);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(40, 13);
             this.lblTime.TabIndex = 7;
@@ -327,7 +326,7 @@
             // lblVolumeValue
             // 
             this.lblVolumeValue.AutoSize = true;
-            this.lblVolumeValue.Location = new System.Drawing.Point(959, 505);
+            this.lblVolumeValue.Location = new System.Drawing.Point(959, 535);
             this.lblVolumeValue.Name = "lblVolumeValue";
             this.lblVolumeValue.Size = new System.Drawing.Size(19, 13);
             this.lblVolumeValue.TabIndex = 8;
@@ -336,7 +335,7 @@
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Location = new System.Drawing.Point(16, 537);
+            this.lblTitle.Location = new System.Drawing.Point(16, 567);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(12, 13);
             this.lblTitle.TabIndex = 9;
@@ -353,13 +352,16 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(993, 562);
+            this.ClientSize = new System.Drawing.Size(993, 593);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.lblVolumeValue);
             this.Controls.Add(this.lblTime);
             this.Controls.Add(this.lblTimeMax);
+            this.Controls.Add(this.lblSearch);
             this.Controls.Add(this.tbTime);
+            this.Controls.Add(this.tbxSearch);
             this.Controls.Add(this.lblVolume);
+            this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.tbVolume);
             this.Controls.Add(this.btnPause);
             this.Controls.Add(this.btnPlay);
@@ -369,7 +371,6 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.tcMain.ResumeLayout(false);
             this.tpMusic.ResumeLayout(false);
-            this.tpMusic.PerformLayout();
             this.tpFavorites.ResumeLayout(false);
             this.tpPlaylists.ResumeLayout(false);
             this.tpPlaylists.PerformLayout();

@@ -11,7 +11,6 @@ namespace SoundStream
         #region Fields
         private int _id;
         private string _name;
-        private int _musics;
         #endregion
 
         #region Properties
@@ -25,19 +24,6 @@ namespace SoundStream
             set
             {
                 _name = value;
-            }
-        }
-
-        public int Musics
-        {
-            get
-            {
-                return _musics;
-            }
-
-            set
-            {
-                _musics = value;
             }
         }
 
@@ -58,11 +44,10 @@ namespace SoundStream
         #region Methods
 
         #region Constructor
-        public Playlist(int pId, string pName, int pMusics)
+        public Playlist(int pId, string pName)
         {
             this.Id = pId;
             this.Name = pName;
-            this.Musics = pMusics;
         }
         #endregion
 
