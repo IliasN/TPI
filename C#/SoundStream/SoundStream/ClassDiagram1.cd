@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="SoundStream.Music">
-    <Position X="6" Y="1.25" Width="1.5" />
+  <Class Name="SoundStream.User">
+    <Position X="4.75" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAgIAAgAAgAAAACAAAACAAAAAAAAACAoAAAAQAAAAA=</HashCode>
-      <FileName>Music.cs</FileName>
+      <HashCode>AAACAAAAAAAAAAEEAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>User.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

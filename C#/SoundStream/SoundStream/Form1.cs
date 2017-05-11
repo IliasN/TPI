@@ -165,15 +165,19 @@ namespace SoundStream
             Environment.Exit(0);
         }
 
+        /// <summary>
+        /// Get the favorites and the playlists from the database and put them in the listboxs
+        /// </summary>
         private void UpdateData()
         {
+            //Clear the lists
             lsbFavorites.DataSource = null;
             lsbPlaylist.DataSource = null;
-            //Recuperation des playlists et favoris
+            //Get the playlists and favorites
             this.Playlists = this.Database.GetPlaylistsMusics(this.User.Id);
             this.PlaylistsData = this.Database.GetPlaylistsData(this.User.Id);
             this.Favorites = this.Database.GetFavorites(this.User.Id);
-            //Recuperation et application de l'autocomplete pour la recherche
+            //Get the autocomplete data and set it up
             this.AutoComplete = this.Database.GetAutocomplete();
             AutoCompleteStringCollection autoCompleteSource = new AutoCompleteStringCollection();
             foreach (var item in this.AutoComplete)
@@ -183,13 +187,13 @@ namespace SoundStream
             tbxSearch.AutoCompleteCustomSource = autoCompleteSource;
             this.AutoComplete.Clear();
 
-            //Affichage favoris
+            //Show the favorites in the list
             lsbFavorites.DataSource = this.Favorites.Select(music => music.Artist + " - " + music.Title).ToList();
 
-            //Recupere les noms des playlists
+            //Set the combobox sources to the plalists name
             cmbPlaylist.DataSource = this.PlaylistsData.Select(p => p.Name).ToList();
             cmbPlaylistToAdd.DataSource = cmbPlaylist.DataSource;
-            //Empeche de lancer une musique automatiquement
+            //Stop the launching of a song when its loaded
             this.Player.Stop();
         }
 

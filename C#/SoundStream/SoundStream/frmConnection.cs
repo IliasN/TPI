@@ -96,9 +96,10 @@ namespace SoundStream
 
         /// <summary>
         /// https://coderwall.com/p/4puszg/c-convert-string-to-md5-hash
+        /// Convert a string into a md5 hash
         /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
+        /// <param name="input">the string to convert</param>
+        /// <returns>the hashed string</returns>
         private string PasswordHash(string input)
         {
             StringBuilder hash = new StringBuilder();
