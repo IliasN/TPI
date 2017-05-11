@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.tcMain = new System.Windows.Forms.TabControl();
             this.tpPlaylists = new System.Windows.Forms.TabPage();
+            this.btnDeletePlaylist = new System.Windows.Forms.Button();
+            this.tbxNewPlaylist = new System.Windows.Forms.TextBox();
             this.btnCreatePlaylist = new System.Windows.Forms.Button();
             this.btnDelFromPlaylist = new System.Windows.Forms.Button();
             this.lblPlaylist = new System.Windows.Forms.Label();
@@ -57,8 +59,6 @@
             this.lblVolumeValue = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.tmrMain = new System.Windows.Forms.Timer(this.components);
-            this.tbxNewPlaylist = new System.Windows.Forms.TextBox();
-            this.btnDeletePlaylist = new System.Windows.Forms.Button();
             this.tcMain.SuspendLayout();
             this.tpPlaylists.SuspendLayout();
             this.tpFavorites.SuspendLayout();
@@ -94,6 +94,27 @@
             this.tpPlaylists.TabIndex = 2;
             this.tpPlaylists.Text = "Playlists";
             this.tpPlaylists.UseVisualStyleBackColor = true;
+            // 
+            // btnDeletePlaylist
+            // 
+            this.btnDeletePlaylist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeletePlaylist.Location = new System.Drawing.Point(489, 398);
+            this.btnDeletePlaylist.Name = "btnDeletePlaylist";
+            this.btnDeletePlaylist.Size = new System.Drawing.Size(129, 35);
+            this.btnDeletePlaylist.TabIndex = 13;
+            this.btnDeletePlaylist.Text = "Supprimer cette playlist";
+            this.btnDeletePlaylist.UseVisualStyleBackColor = true;
+            this.btnDeletePlaylist.Click += new System.EventHandler(this.btnDeletePlaylist_Click);
+            // 
+            // tbxNewPlaylist
+            // 
+            this.tbxNewPlaylist.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.tbxNewPlaylist.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.tbxNewPlaylist.Location = new System.Drawing.Point(759, 406);
+            this.tbxNewPlaylist.Name = "tbxNewPlaylist";
+            this.tbxNewPlaylist.Size = new System.Drawing.Size(196, 20);
+            this.tbxNewPlaylist.TabIndex = 12;
+            this.tbxNewPlaylist.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbxNewPlaylist_KeyDown);
             // 
             // btnCreatePlaylist
             // 
@@ -309,7 +330,6 @@
             this.tbTime.Name = "tbTime";
             this.tbTime.Size = new System.Drawing.Size(447, 45);
             this.tbTime.TabIndex = 5;
-            this.tbTime.Value = 50;
             this.tbTime.Scroll += new System.EventHandler(this.tbTime_Scroll);
             // 
             // lblTimeMax
@@ -353,27 +373,6 @@
             this.tmrMain.Enabled = true;
             this.tmrMain.Interval = 500;
             this.tmrMain.Tick += new System.EventHandler(this.tmrMain_Tick);
-            // 
-            // tbxNewPlaylist
-            // 
-            this.tbxNewPlaylist.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.tbxNewPlaylist.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.tbxNewPlaylist.Location = new System.Drawing.Point(759, 406);
-            this.tbxNewPlaylist.Name = "tbxNewPlaylist";
-            this.tbxNewPlaylist.Size = new System.Drawing.Size(196, 20);
-            this.tbxNewPlaylist.TabIndex = 12;
-            this.tbxNewPlaylist.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbxNewPlaylist_KeyDown);
-            // 
-            // btnDeletePlaylist
-            // 
-            this.btnDeletePlaylist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeletePlaylist.Location = new System.Drawing.Point(489, 398);
-            this.btnDeletePlaylist.Name = "btnDeletePlaylist";
-            this.btnDeletePlaylist.Size = new System.Drawing.Size(129, 35);
-            this.btnDeletePlaylist.TabIndex = 13;
-            this.btnDeletePlaylist.Text = "Supprimer cette playlist";
-            this.btnDeletePlaylist.UseVisualStyleBackColor = true;
-            this.btnDeletePlaylist.Click += new System.EventHandler(this.btnDeletePlaylist_Click);
             // 
             // frmMain
             // 

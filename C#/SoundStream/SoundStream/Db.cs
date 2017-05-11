@@ -280,7 +280,9 @@ namespace SoundStream
             {
                 try
                 {
-                    MySqlCommand cmd = new MySqlCommand("INSERT INTO playlists (namePlaylist,idUser) VALUES (@name,@idUser)", this.Connection);
+//                    MySqlCommand cmd = new MySqlCommand("INSERT INTO playlists (namePlaylist,idUser) VALUES (@name,@idUser) WHERE NOT EXISTS (SELECT * FROM playlists WHERE namePlaylist = @name AND idUser = @idUser)", this.Connection);
+
+                    MySqlCommand cmd = new MySqlCommand("INSERT INTO playlists (namePlaylist,idUser) SELECT @name,@idUser WHERE NOT EXISTS (SELECT * FROM playlists WHERE namePlaylist = @name AND idUser = @idUser)", this.Connection);
                     cmd.Parameters.AddWithValue("@name", pName);
                     cmd.Parameters.AddWithValue("@idUser", pIdUser.ToString());
                     cmd.ExecuteNonQuery();

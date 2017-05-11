@@ -75,7 +75,7 @@ namespace SoundStream
             }
             else
             {
-                if (tbxName.Text != "" && tbxPass.Text != "" && tbxConfPass.Text != "" && tbxConfPass.Text == tbxPass.Text && btnAccept.Text == "Inscription" && this.Database.TestConnection(tbxName.Text, PasswordHash(tbxPass.Text)) == null)
+                if (tbxName.Text.Trim() != "" && tbxPass.Text.Trim() != "" && tbxConfPass.Text.Trim() != "" && tbxConfPass.Text == tbxPass.Text && btnAccept.Text == "Inscription" && this.Database.TestConnection(tbxName.Text, PasswordHash(tbxPass.Text)) == null)
                 {
                     this.Database.CreateAccount(tbxName.Text, PasswordHash(tbxPass.Text));
                     MessageBox.Show("Votre compte a bien été crée");
@@ -85,6 +85,7 @@ namespace SoundStream
                     tbxPass.Clear();
                     btnAccept.Text = "Connexion";
                     llblSwitch.Text = "Inscription";
+                    tbxPass.Focus();
                 }
                 else
                 {

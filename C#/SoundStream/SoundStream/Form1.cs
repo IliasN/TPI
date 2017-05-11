@@ -155,19 +155,19 @@ namespace SoundStream
             this.Player = new Music();
             this.PlayingId = -1;
             UpdateData();
-            
+
         }
         #endregion
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            this.Player.Stop();
             Environment.Exit(0);
         }
 
         private void UpdateData()
         {
             lsbFavorites.DataSource = null;
-            lsbMusiques.DataSource = null;
             lsbPlaylist.DataSource = null;
             //Recuperation des playlists et favoris
             this.Playlists = this.Database.GetPlaylistsMusics(this.User.Id);
@@ -302,6 +302,7 @@ namespace SoundStream
                 //Affiche le nom de la musique
                 lblTitle.Text = lsbPlaylist.Items[lsbPlaylist.SelectedIndex].ToString();
                 this.Player.Play();
+
             }
         }
 
@@ -324,17 +325,23 @@ namespace SoundStream
 
         private void btnDelFromPlaylist_Click(object sender, EventArgs e)
         {
-            this.Database.DeleteFromPlaylist(this.PlaylistsData.First(p => p.Name == cmbPlaylist.Text).Id, this.PlayingId);
-            UpdateData();
+            if (cmbPlaylist.Text != "")
+            {
+                this.Database.DeleteFromPlaylist(this.PlaylistsData.First(p => p.Name == cmbPlaylist.Text).Id, this.PlayingId);
+                UpdateData();
+            }
         }
 
         private void btnDeletePlaylist_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Voulez vous vraiment supprimer " + cmbPlaylist.Text + " de vos playlist ?" , "Confirmation" ,MessageBoxButtons.YesNo);
-            if(result == DialogResult.Yes)
+            if (cmbPlaylist.Text != "")
             {
-                this.Database.DeletePlaylist(this.PlaylistsData.First(p => p.Name == cmbPlaylist.Text).Id);
-                UpdateData();
+                DialogResult result = MessageBox.Show("Voulez vous vraiment supprimer " + cmbPlaylist.Text + " de vos playlist ?", "Confirmation", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    this.Database.DeletePlaylist(this.PlaylistsData.First(p => p.Name == cmbPlaylist.Text).Id);
+                    UpdateData();
+                }
             }
         }
 
