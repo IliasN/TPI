@@ -1,0 +1,13 @@
+C:\Users\Administrateur\Desktop\NHAIRI_TPI_2017\C#\SoundStream\SoundStream\bin\Release\SoundStream.exe.config
+C:\Users\Administrateur\Desktop\NHAIRI_TPI_2017\C#\SoundStream\SoundStream\obj\Release\Interop.WMPLib.dll
+C:\Users\Administrateur\Desktop\NHAIRI_TPI_2017\C#\SoundStream\SoundStream\obj\Release\SoundStream.csproj.ResolveComReference.cache
+C:\Users\Administrateur\Desktop\NHAIRI_TPI_2017\C#\SoundStream\SoundStream\bin\Release\SoundStream.exe
+C:\Users\Administrateur\Desktop\NHAIRI_TPI_2017\C#\SoundStream\SoundStream\bin\Release\SoundStream.pdb
+C:\Users\Administrateur\Desktop\NHAIRI_TPI_2017\C#\SoundStream\SoundStream\bin\Release\MySql.Data.dll
+C:\Users\Administrateur\Desktop\NHAIRI_TPI_2017\C#\SoundStream\SoundStream\obj\Release\SoundStream.csprojResolveAssemblyReference.cache
+C:\Users\Administrateur\Desktop\NHAIRI_TPI_2017\C#\SoundStream\SoundStream\obj\Release\SoundStream.frmMain.resources
+C:\Users\Administrateur\Desktop\NHAIRI_TPI_2017\C#\SoundStream\SoundStream\obj\Release\SoundStream.frmConnection.resources
+C:\Users\Administrateur\Desktop\NHAIRI_TPI_2017\C#\SoundStream\SoundStream\obj\Release\SoundStream.Properties.Resources.resources
+C:\Users\Administrateur\Desktop\NHAIRI_TPI_2017\C#\SoundStream\SoundStream\obj\Release\SoundStream.csproj.GenerateResource.Cache
+C:\Users\Administrateur\Desktop\NHAIRI_TPI_2017\C#\SoundStream\SoundStream\obj\Release\SoundStream.exe
+C:\Users\Administrateur\Desktop\NHAIRI_TPI_2017\C#\SoundStream\SoundStream\obj\Release\SoundStream.pdb
