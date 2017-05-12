@@ -9,7 +9,7 @@ using MySql;
 namespace SoundStream
 {
     /// <summary>
-    /// La classe BDD sert à se connecter à la base de données et à executer des requetes
+    /// The Db class is used to connect to the database and to execute requests
     /// </summary>
     public class Db
     {
@@ -96,6 +96,7 @@ namespace SoundStream
             }
             return currentUser;
         }
+
         /// <summary>
         /// Check if the username is already used
         /// </summary>
@@ -119,6 +120,11 @@ namespace SoundStream
             return userExists;
         }
 
+        /// <summary>
+        /// Create an account in the database
+        /// </summary>
+        /// <param name="pseudo">the new username</param>
+        /// <param name="pass">The password of the user hashed in md5</param>
         public void CreateAccount(string pseudo, string pass)
         {
             if (IsConnected())
@@ -130,6 +136,12 @@ namespace SoundStream
             }
         }
 
+        /// <summary>
+        /// Get the music by the artist name or the music title
+        /// </summary>
+        /// <param name="pTitle">title to search</param>
+        /// <param name="pArtist">artist to search</param>
+        /// <returns>A list of "MusicData" objects</returns>
         public List<MusicData> GetMusics(string pTitle, string pArtist)
         {
             List<MusicData> output = new List<MusicData>();
@@ -149,6 +161,11 @@ namespace SoundStream
             return output;
         }
 
+        /// <summary>
+        /// Get the musics from a playlist
+        /// </summary>
+        /// <param name="pId">The id of the user wich we want the playlists</param>
+        /// <returns>A list of "MusicData" objects</returns>
         public List<MusicData> GetPlaylistsMusics(int pId)
         {
             List<MusicData> output = new List<MusicData>();
@@ -167,6 +184,11 @@ namespace SoundStream
             return output;
         }
 
+        /// <summary>
+        /// Get the favorites musics from a user
+        /// </summary>
+        /// <param name="pId">The id of the user wich we want the favorites</param>
+        /// <returns>A list of "MusicData" objects</returns>
         public List<MusicData> GetFavorites(int pId)
         {
             List<MusicData> output = new List<MusicData>();
@@ -185,6 +207,10 @@ namespace SoundStream
             return output;
         }
 
+        /// <summary>
+        /// Get all the titles and artists name for the autocomplete
+        /// </summary>
+        /// <returns>A list of strings</returns>
         public List<string> GetAutocomplete()
         {
             List<string> output = new List<string>();
@@ -233,6 +259,11 @@ namespace SoundStream
             }
         }
 
+        /// <summary>
+        /// Add a song to a playlist
+        /// </summary>
+        /// <param name="pIdPlaylist">The id of the playlist to add the song to</param>
+        /// <param name="pIdMusic">The id of the music to add</param>
         public void AddToPlaylist(int pIdPlaylist, int pIdMusic)
         {
             if (IsConnected())
@@ -251,6 +282,11 @@ namespace SoundStream
             }
         }
 
+        /// <summary>
+        /// Get the informations of all the playlists from a user
+        /// </summary>
+        /// <param name="pIdUser">The user wich we want the playlists id</param>
+        /// <returns>A list of "Playlist" object</returns>
         public List<Playlist> GetPlaylistsData(int pIdUser)
         {
             List<Playlist> output = new List<Playlist>();
@@ -269,6 +305,11 @@ namespace SoundStream
             return output;
         }
 
+        /// <summary>
+        /// Delete a music from a playlist
+        /// </summary>
+        /// <param name="pIdPlaylist">the playlist wich we want to modify</param>
+        /// <param name="pIdMusic">The music id to remove</param>
         public void DeleteFromPlaylist(int pIdPlaylist,int pIdMusic)
         {
             if (IsConnected())
@@ -287,12 +328,17 @@ namespace SoundStream
             }
         }
 
+        /// <summary>
+        /// delete a playlist from the database
+        /// </summary>
+        /// <param name="pIdPlaylist">The id of the playlist we want to delete</param>
         public void DeletePlaylist(int pIdPlaylist)
         {
             if (IsConnected())
             {
                 try
                 {
+                    //First we delete all the song in that playlist to avoid key constraint
                     MySqlCommand cmd = new MySqlCommand("DELETE FROM contain WHERE idPlaylist = @idPlaylist", this.Connection);
                     cmd.Parameters.AddWithValue("@idPlaylist", pIdPlaylist.ToString());
                     cmd.ExecuteNonQuery();
@@ -307,6 +353,11 @@ namespace SoundStream
             }
         }
 
+        /// <summary>
+        /// Create a playlist if it doesnt already exists for the same user.
+        /// </summary>
+        /// <param name="pName">The playlist name</param>
+        /// <param name="pIdUser">The id of the creator</param>
         public void CreatePlaylist(string pName, int pIdUser)
         {
             if (IsConnected())
@@ -325,6 +376,11 @@ namespace SoundStream
             }
         }
 
+        /// <summary>
+        /// Delete a music from the favorites of a user
+        /// </summary>
+        /// <param name="pIdUser">The id of the user</param>
+        /// <param name="pIdMusic">The music to remove from the user favorites</param>
         public void DeleteFromFavorites(int pIdUser,int pIdMusic)
         {
             if (IsConnected())
@@ -353,7 +409,7 @@ namespace SoundStream
         }
 
         /// <summary>
-        /// Ferme la base de données
+        /// Close the database connetion
         /// </summary>
         public void Close()
         {
