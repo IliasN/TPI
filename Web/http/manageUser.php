@@ -66,7 +66,7 @@ $playlists = $query->fetchall();
   <h2>Administrateur</h2>
   <h3>Gestion utilisateur "<?php echo $user['pseudoUser']; ?>" :</h3>
 <?php if(count($playlists) > 0){ ?>
-  <form action="manageUsersphp" method="post">
+  <form action="delPlaylists.php" method="post">
     <table class="table table-hover">
       <thead>
         <tr>
@@ -80,7 +80,7 @@ $playlists = $query->fetchall();
         <tr>
           <td><?php echo $playlist['namePlaylist']; ?></td>
           <td><a href="playlist.php?id=<?php echo $playlist['idPlaylist']; ?>">Consulter</a></td>
-          <td><input type="checkbox" name="playlistToDel" value="<?php echo $playlist['idPlaylist']; ?>"></td>
+          <td><input type="checkbox" name="playlistToDel[]" value="<?php echo $playlist['idPlaylist']; ?>"></td>
         </tr>
         <?php } ?>
       </tbody>
