@@ -1,3 +1,13 @@
+<?php
+require_once("php/functions.php");
+session_start();
+
+//Get the users data
+$sql = "SELECT * FROM users";
+$query = $db->prepare($sql);
+$query->execute();
+$users = $query->fetchall();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -34,21 +44,13 @@
         </tr>
       </thead>
       <tbody>
+        <?php foreach ($users as $user) {?>
         <tr>
-          <td>Tom</td>
-          <td><a href="manageUser.php">Consulter</a></td>
-          <td><input type="checkbox" name="" value=""></td>
+          <td><?php echo $user['pseudoUser']; ?></td>
+          <td><a href="manageUser.php?id=<?php echo $user['idUser']; ?>">Consulter</a></td>
+          <td><input type="checkbox" name="usersToDel[]" value="<?php echo $user['idUser']; ?>"></td>
         </tr>
-        <tr>
-          <td>David</td>
-          <td><a href="manageUser.php">Consulter</a></td>
-          <td><input type="checkbox" name="" value=""></td>
-        </tr>
-        <tr>
-          <td>Dylan</td>
-          <td><a href="manageUser.php">Consulter</a></td>
-          <td><input type="checkbox" name="" value=""></td>
-        </tr>
+        <?php } ?>
       </tbody>
     </table>
     <input type="submit" class="btn btn-danger" value="Supprimer les utilisateur sélectionnés"/>

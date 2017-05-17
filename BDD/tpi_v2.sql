@@ -250,8 +250,8 @@ ALTER TABLE `users`
 -- Contraintes pour la table `contain`
 --
 ALTER TABLE `contain`
-  ADD CONSTRAINT `FK_contain_idMusic` FOREIGN KEY (`idMusic`) REFERENCES `musics` (`idMusic`),
-  ADD CONSTRAINT `FK_contain_idPlaylist` FOREIGN KEY (`idPlaylist`) REFERENCES `playlists` (`idPlaylist`);
+  ADD CONSTRAINT `FK_contain_idMusic` FOREIGN KEY (`idMusic`) REFERENCES `musics` (`idMusic`)ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_contain_idPlaylist` FOREIGN KEY (`idPlaylist`) REFERENCES `playlists` (`idPlaylist`)ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `musics`
@@ -264,7 +264,7 @@ ALTER TABLE `musics`
 -- Contraintes pour la table `playlists`
 --
 ALTER TABLE `playlists`
-  ADD CONSTRAINT `FK_playlists_idUser` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`);
+  ADD CONSTRAINT `FK_playlists_idUser` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`)ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
