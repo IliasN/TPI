@@ -1,11 +1,33 @@
 <?php
 require_once("php/functions.php");
 session_start();
-//Check that the playlist is from the connected user
-//Get the playlist musics
-$query = $db->prepare("SELECT DISTINCT musics.titleMusic,artists.nameArtist,types.labelType,playlists.namePlaylist FROM musics,artists,playlists,contain,types WHERE musics.idArtist = artists.idArtist AND musics.idType = types.idType AND playlists.idUser = :idUser AND contain.idPlaylist = playlists.idPlaylist AND playlists.idPlaylist = :idPlaylist ORDER BY musics.titleMusic;");
+CheckConnexion();
+//Check that the playlist is from the connected user or that he is admin
+$query = $db->prepare("SELECT * FROM playlists WHERE idPlaylist = :idPlaylist AND idUser = :idUser");
 $query->execute(array(
   'idUser' => $_SESSION['idUser'],
+  'idPlaylist' => htmlentities($_GET['id'])
+));
+if(count($query->fetchall()) == 0 && $_SESSION['privilegeUser'] == 0){
+  header("Location: user.php");
+}
+//Get the playlist data
+$sql = "SELECT namePlaylist,pseudoUser FROM playlists, users WHERE users.idUser = playlists.idUser AND playlists.idPlaylist = :idPlaylist";
+$query = $db->prepare($sql);
+$query->execute(array(
+  'idPlaylist' => htmlentities($_GET['id'])
+));
+$playlistData = $query->fetchall();
+if(count($playlistData) == 0){
+  header("Location: user.php");
+}
+$playlistData = $playlistData[0];
+//Get the playlist musics
+$sql = 'SELECT * FROM musics,playlists,types,contain,artists WHERE musics.idType = types.idType AND contain.idPlaylist = playlists.idPlaylist AND
+contain.idMusic = musics.idMusic AND playlists.idPlaylist = :idPlaylist AND artists.idArtist = musics.idArtist';
+
+$query = $db->prepare($sql);
+$query->execute(array(
   'idPlaylist' => htmlentities($_GET['id'])
 ));
 $data = $query->fetchall();
@@ -32,6 +54,9 @@ $data = $query->fetchall();
             <li>
               <a href="deconnexion.php">Déconnexion</a>
             </li>
+            <li>
+              <a href="user.php">Mes playlists</a>
+            </li>
           </ul>
           <?php } ?>
         </div>
@@ -39,8 +64,8 @@ $data = $query->fetchall();
     </nav>
 
     <div class="container">
-      <h2><?php echo $_SESSION['pseudoUser']; ?></h2>
-      <h3>Playlist "<?php echo $data[0]['namePlaylist']; ?>" :</h3>
+      <h2>Playlist de : <?php echo $playlistData['pseudoUser']; ?></h2>
+      <h3>Playlist "<?php echo $playlistData['namePlaylist']; ?>" :</h3>
       <?php if(count($data) > 0){ ?>
         <table class="table table-hover">
           <thead>

@@ -13,3 +13,9 @@ function Debug($data){
   print_r($data);
   echo "</pre>";
 }
+
+function CheckConnexion(){
+  if (!isset($_SESSION['idUser'])) {
+    header("Location: index.php");
+  }
+}

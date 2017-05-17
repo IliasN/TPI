@@ -2,9 +2,7 @@
 require_once("php/functions.php");
 session_start();
 //Check if user connected
-if (!isset($_SESSION['idUser'])) {
-  header("Location: index.php");
-}
+CheckConnexion();
 
 $query = $db->prepare("SELECT * FROM playlists WHERE idUser = :id");
 $query->execute(array(
@@ -35,6 +33,9 @@ $data = $query->fetchall();
       <ul class="nav navbar-nav">
         <li>
           <a href="deconnexion.php">Déconnexion</a>
+        </li>
+        <li>
+          <a href="user.php">Mes playlists</a>
         </li>
       </ul>
       <?php } ?>
