@@ -46,22 +46,28 @@ $data = $query->fetchall();
   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
-        <a class="navbar-brand" href="index.php">SoundStream</a>
-      </div>
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <?php if(isset($_SESSION['idUser'])) {?>
-          <ul class="nav navbar-nav">
-            <li>
-              <a href="deconnexion.php">Déconnexion</a>
-            </li>
-            <li>
-              <a href="user.php">Mes playlists</a>
-            </li>
-          </ul>
-          <?php } ?>
-        </div>
-      </div>
-    </nav>
+      </button>
+      <a class="navbar-brand" href="user.php">SoundStream</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <?php if(isset($_SESSION['idUser'])) {?>
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="user.php">Mes playlists</a>
+        </li>
+        <?php   if ($_SESSION['privilegeUser'] == 1) { ?>
+        <li>
+          <a href="admin.php">Administration</a>
+        </li>
+        <?php } ?>
+        <li>
+          <a href="deconnexion.php">Déconnexion</a>
+        </li>
+      </ul>
+      <?php } ?>
+    </div>
+  </div>
+</nav>
 
     <div class="container">
       <h2>Playlist de : <?php echo $playlistData['pseudoUser']; ?></h2>

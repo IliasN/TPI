@@ -2,8 +2,11 @@
 require_once("php/functions.php");
 session_start();
 
+// CheckConnexion and admin
+CheckConnexion();
+CheckAdmin();
 //Get the users data
-$sql = "SELECT * FROM users";
+$sql = "SELECT * FROM users WHERE privilegesUser != 1";
 $query = $db->prepare($sql);
 $query->execute();
 $users = $query->fetchall();
@@ -23,9 +26,22 @@ $users = $query->fetchall();
     <div class="container">
       <div class="navbar-header">
       </button>
-      <a class="navbar-brand" href="index.php">SoundStream</a>
+      <a class="navbar-brand" href="user.php">SoundStream</a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <?php if(isset($_SESSION['idUser'])) {?>
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="user.php">Mes playlists</a>
+        </li>
+        <li>
+          <a href="admin.php">Administration</a>
+        </li>
+        <li>
+          <a href="deconnexion.php">Déconnexion</a>
+        </li>
+      </ul>
+      <?php } ?>
     </div>
   </div>
 </nav>
@@ -34,7 +50,7 @@ $users = $query->fetchall();
 
   <h2>Administrateur</h2>
 
-  <form class="" action="manageUsers.php" method="post">
+  <form action="delUsers.php" method="post">
     <table class="table table-hover">
       <thead>
         <tr>

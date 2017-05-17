@@ -1,3 +1,31 @@
+<?php
+require_once("php/functions.php");
+session_start();
+
+// CheckConnexion and admin
+CheckConnexion();
+CheckAdmin();
+
+//Check if the user exists and get its data
+$sql = "SELECT * FROM users WHERE idUser = :id";
+$query = $db->prepare($sql);
+$query->execute(array(
+  'id' => htmlentities($_GET['id'])
+));
+$user = $query->fetchall();
+
+if(count($user) == 0){
+  header("Location: manageUsers.php");
+}
+$user = $user[0];
+//Get all the playlists
+$sql = "SELECT * FROM playlists WHERE idUser = :id";
+$query = $db->prepare($sql);
+$query->execute(array(
+  'id' => htmlentities($_GET['id'])
+));
+$playlists = $query->fetchall();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -13,9 +41,22 @@
     <div class="container">
       <div class="navbar-header">
       </button>
-      <a class="navbar-brand" href="index.php">SoundStream</a>
+      <a class="navbar-brand" href="user.php">SoundStream</a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <?php if(isset($_SESSION['idUser'])) {?>
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="user.php">Mes playlists</a>
+        </li>
+        <li>
+          <a href="admin.php">Administration</a>
+        </li>
+        <li>
+          <a href="deconnexion.php">Déconnexion</a>
+        </li>
+      </ul>
+      <?php } ?>
     </div>
   </div>
 </nav>
@@ -23,8 +64,8 @@
 <div class="container">
 
   <h2>Administrateur</h2>
-  <h3>Gestion utilisateur "Tom" :</h3>
-
+  <h3>Gestion utilisateur "<?php echo $user['pseudoUser']; ?>" :</h3>
+<?php if(count($playlists) > 0){ ?>
   <form action="manageUsersphp" method="post">
     <table class="table table-hover">
       <thead>
@@ -35,24 +76,23 @@
         </tr>
       </thead>
       <tbody>
+        <?php foreach ($playlists as $playlist) { ?>
         <tr>
-          <td>Tom</td>
-          <td><a href="playlist.php">Consulter</a></td>
-          <td><input type="checkbox" name="" value=""></td>
+          <td><?php echo $playlist['namePlaylist']; ?></td>
+          <td><a href="playlist.php?id=<?php echo $playlist['idPlaylist']; ?>">Consulter</a></td>
+          <td><input type="checkbox" name="playlistToDel" value="<?php echo $playlist['idPlaylist']; ?>"></td>
         </tr>
-        <tr>
-          <td>Tom</td>
-          <td><a href="playlist.php">Consulter</a></td>
-          <td><input type="checkbox" name="" value=""></td>
-        </tr>
+        <?php } ?>
       </tbody>
     </table>
     <input type="submit" class="btn btn-danger" value="Supprimer les playlists sélectionnés"/>
   </form>
-
-  <form action="manageUsers.php" method="post">
-    <input type="hidden" name="userToDel" value="">
-    <input type="submit" class="btn btn-danger" value="Supprimer 'Tom'">
+<?php }else{ ?>
+  <p>Aucune playlist.</p>
+  <?php } ?>
+  <form action="delUsers.php" method="post">
+    <input type="hidden" name="usersToDel[]" value="<?php echo $user['idUser']; ?>">
+    <input type="submit" class="btn btn-danger" value="Supprimer '<?php echo $user['pseudoUser']; ?>'">
   </form>
 
   <footer>

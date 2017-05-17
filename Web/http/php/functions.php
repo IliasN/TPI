@@ -19,3 +19,9 @@ function CheckConnexion(){
     header("Location: index.php");
   }
 }
+
+function CheckAdmin(){
+  if ($_SESSION['privilegeUser'] == 0) {
+    header("Location: user.php");
+  }
+}

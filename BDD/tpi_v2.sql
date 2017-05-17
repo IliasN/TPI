@@ -7,6 +7,10 @@
 -- Version du serveur :  5.7.17
 -- Version de PHP :  5.6.30
 
+DROP DATABASE IF EXISTS tpi;
+CREATE DATABASE tpi;
+USE tpi;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;

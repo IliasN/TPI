@@ -1,3 +1,11 @@
+<?php
+require_once("php/functions.php");
+session_start();
+
+// CheckConnexion and admin
+CheckConnexion();
+CheckAdmin();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -13,9 +21,20 @@
     <div class="container">
       <div class="navbar-header">
       </button>
-      <a class="navbar-brand" href="index.php">SoundStream</a>
+      <a class="navbar-brand" href="user.php">SoundStream</a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="user.php">Mes playlists</a>
+        </li>
+        <li>
+          <a href="admin.php">Administration</a>
+        </li>
+        <li>
+          <a href="deconnexion.php">Déconnexion</a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
