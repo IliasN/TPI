@@ -1,3 +1,29 @@
+<?php
+require_once("php/functions.php");
+if (isset($_POST['pseudo']) && isset($_POST['pass'])) {
+  $pseudo = htmlentities($_POST['pseudo']);
+  $pass = md5($_POST['pass']);
+  $query = $db->prepare("SELECT * FROM users WHERE pseudoUser = :pseudo AND passUser = :pass");
+  $query->execute(array(
+    'pseudo' => $pseudo,
+    'pass' => $pass
+  ));
+  $data = $query->fetchall();
+
+  if (count($data) == 1) {
+    session_start();
+    $_SESSION['pseudoUser'] = $pseudo;
+    $_SESSION['idUser'] = $data[0]['idUser'];
+    $_SESSION['privilegeUser'] = $data[0]['privilegesUser'];
+    if ($_SESSION['privilegeUser'] == 1) {
+      header("Location: admin.php");
+    }
+    else {
+      header("Location: user.php");
+    }
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -13,7 +39,7 @@
     <div class="container">
       <div class="navbar-header">
       </button>
-      <a class="navbar-brand" href="#">SoundStream</a>
+      <a class="navbar-brand" href="index.php">SoundStream</a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     </div>
@@ -22,12 +48,12 @@
 
 <div class="container">
 
-  <form class="form-signin" action="test.php" method="post">
+  <form class="form-signin" action="index.php" method="post">
           <h2 class="form-signin-heading">Connexion</h2>
-          <label for="inputEmail" class="sr-only">Pseudo</label>
-          <input type="text" id="inputEmail" class="form-control" placeholder="Pseudo" required autofocus>
+          <label for="pseudo" class="sr-only">Pseudo</label>
+          <input type="text" id="pseudo" class="form-control" placeholder="Pseudo" name="pseudo" required autofocus>
           <label for="inputPassword" class="sr-only">Mot de passe</label>
-          <input type="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
+          <input type="password" id="inputPassword" class="form-control" placeholder="Mot de passe" name="pass" required>
           <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
           <div class="text-center">
             <a href="inscription.php">Inscription</a>

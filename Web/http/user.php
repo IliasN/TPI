@@ -1,3 +1,18 @@
+<?php
+require_once("php/functions.php");
+session_start();
+//Check if user connected
+if (!isset($_SESSION['idUser'])) {
+  header("Location: index.php");
+}
+
+$query = $db->prepare("SELECT * FROM playlists WHERE idUser = :id");
+$query->execute(array(
+  'id' => $_SESSION['idUser']
+));
+$data = $query->fetchall();
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -16,13 +31,30 @@
       <a class="navbar-brand" href="index.php">SoundStream</a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <?php if(isset($_SESSION['idUser'])) {?>
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="deconnexion.php">Déconnexion</a>
+        </li>
+      </ul>
+      <?php } ?>
     </div>
   </div>
 </nav>
 
 <div class="container">
-
-  <!-- Contenu ici -->
+  <h2><?php echo $_SESSION['pseudoUser']; ?></h2>
+  <h3>Vos playlists :</h3>
+  <?php if(count($data) > 0) { ?>
+  <div class="list-group">
+    <?php foreach ($data as $playlist) { ?>
+    <a href="playlist.php?id=<?php echo $playlist['idPlaylist']; ?>" class="list-group-item"><?php echo $playlist['namePlaylist']; ?></a>
+    <?php } ?>
+  </div>
+  <?php }
+  else{ ?>
+    <p>Vous n'avez pas de playlists.</p>
+    <?php } ?>
 
   <footer>
     <div class="row">

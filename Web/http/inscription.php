@@ -1,3 +1,18 @@
+<?php
+require_once("php/functions.php");
+if (isset($_POST['pseudo']) && isset($_POST['pass']) && isset($_POST['passConf']) && $_POST['passConf'] == $_POST['pass']) {
+  $pseudo = htmlentities($_POST['pseudo']);
+  $pass = md5($_POST['passConf']);
+
+  $query = $db->prepare("INSERT INTO users (pseudoUser,passUser,privilegesUser) VALUES (:pseudo,:pass,0)");
+  $query->execute(array(
+    'pseudo' => $pseudo,
+    'pass' => $pass
+  ));
+
+  header("Location: index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -13,7 +28,7 @@
     <div class="container">
       <div class="navbar-header">
       </button>
-      <a class="navbar-brand" href="#">SoundStream</a>
+      <a class="navbar-brand" href="index.php">SoundStream</a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     </div>
@@ -22,17 +37,17 @@
 
 <div class="container">
 
-  <form class="form-signin" action="test.php" method="post">
+  <form class="form-signin" action="inscription.php" method="post">
           <h2 class="form-signin-heading">Connexion</h2>
-          <label for="inputEmail" class="sr-only">Pseudo</label>
-          <input type="text" id="inputEmail" class="form-control" placeholder="Pseudo" required autofocus>
+          <label for="pseudo" class="sr-only">Pseudo</label>
+          <input type="text" id="pseudo" class="form-control" placeholder="Pseudo" name="pseudo" required autofocus>
           <label for="inputPassword" class="sr-only">Mot de passe</label>
-          <input type="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
+          <input type="password" id="inputPassword" class="form-control" placeholder="Mot de passe" name="pass" required>
           <label for="inputPasswordConf" class="sr-only">Mot de passe</label>
-          <input type="password" id="inputPasswordConf" class="form-control" placeholder="Confirmer le mot de passe" required>
+          <input type="password" id="inputPasswordConf" class="form-control" placeholder="Confirmer le mot de passe" name="passConf" required>
           <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
           <div class="text-center">
-            <a href="index.php">Connexion</a>
+            <a href="index.php">Inscription</a>
           </div>
         </form>
   <footer>

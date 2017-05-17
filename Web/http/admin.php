@@ -22,7 +22,10 @@
 
 <div class="container">
 
-  <!-- Contenu ici -->
+  <h2>Administrateur</h2>
+  <a href="manageUsers.php">Gérer les utilisateurs</a>
+  <br>
+  <a href="addTitle.php">Ajouter un titre</a>
 
   <footer>
     <div class="row">
