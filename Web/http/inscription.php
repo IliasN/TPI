@@ -1,9 +1,10 @@
 <?php
 require_once("php/functions.php");
+//CHeck the informations to create a new account
 if (isset($_POST['pseudo']) && isset($_POST['pass']) && isset($_POST['passConf']) && $_POST['passConf'] == $_POST['pass']) {
   $pseudo = htmlentities($_POST['pseudo']);
   $pass = md5($_POST['passConf']);
-
+  //insert the data in the database
   $query = $db->prepare("INSERT INTO users (pseudoUser,passUser,privilegesUser) VALUES (:pseudo,:pass,0)");
   $query->execute(array(
     'pseudo' => $pseudo,

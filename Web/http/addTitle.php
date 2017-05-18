@@ -44,29 +44,22 @@ CheckAdmin();
   <h2>Administrateur</h2>
   <h3>Ajouter un titre :</h3>
 
-  <form>
+  <form action="newMusic.php" method="post" enctype="multipart/form-data">
   <div class="form-group">
-    <label for="exampleInputEmail1">Titre :</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <label for="titreMusic">Titre :</label>
+    <input type="text" name="titleToAdd" class="form-control" id="titreMusic" aria-describedby="titreMusic" placeholder="Titre" required>
   </div>
   <div class="form-group">
     <label for="exampleSelect1">Artiste :</label>
-    <select class="form-control" id="exampleSelect1">
-      <option>ACDC</option>
-      <option>Artiste inconnu</option>
-    </select>
+    <?php CreateSelectArtists(); ?>
   </div>
   <div class="form-group">
-    <label for="exampleSelect1">Artiste :</label>
-    <select class="form-control" id="exampleSelect1">
-      <option>Rock</option>
-      <option>Classique</option>
-    </select>
+    <label for="exampleSelect1">Type :</label>
+    <?php CreateSelectTypes(); ?>
   </div>
   <div class="form-group">
-    <label for="exampleInputFile">File input</label>
-    <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" accept=".mp3,audio/*">
-    <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+    <label for="mp3File">Musique (.mp3) :</label>
+    <input type="file" class="form-control-file" id="mp3File" name="fileToAdd" aria-describedby="fileHelp" accept=".mp3,audio/*">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

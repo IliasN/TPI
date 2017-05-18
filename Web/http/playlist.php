@@ -8,6 +8,7 @@ $query->execute(array(
   'idUser' => $_SESSION['idUser'],
   'idPlaylist' => htmlentities($_GET['id'])
 ));
+//If the playlist isnt from the user and he is not an admin he is redirected
 if(count($query->fetchall()) == 0 && $_SESSION['privilegeUser'] == 0){
   header("Location: user.php");
 }

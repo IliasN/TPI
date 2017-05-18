@@ -18,7 +18,7 @@ if(count($user) == 0){
   header("Location: manageUsers.php");
 }
 $user = $user[0];
-//Get all the playlists
+//Get all the playlists for the selected user
 $sql = "SELECT * FROM playlists WHERE idUser = :id";
 $query = $db->prepare($sql);
 $query->execute(array(

@@ -4,6 +4,7 @@ session_start();
 //Check if user connected
 CheckConnexion();
 
+//Get the playlists from a user
 $query = $db->prepare("SELECT * FROM playlists WHERE idUser = :id");
 $query->execute(array(
   'id' => $_SESSION['idUser']

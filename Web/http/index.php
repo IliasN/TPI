@@ -1,5 +1,6 @@
 <?php
 require_once("php/functions.php");
+//Check if the user login informations are correct
 if (isset($_POST['pseudo']) && isset($_POST['pass'])) {
   $pseudo = htmlentities($_POST['pseudo']);
   $pass = md5($_POST['pass']);
@@ -11,10 +12,12 @@ if (isset($_POST['pseudo']) && isset($_POST['pass'])) {
   $data = $query->fetchall();
 
   if (count($data) == 1) {
+    //Put the user datas in the session for future verifications
     session_start();
     $_SESSION['pseudoUser'] = $pseudo;
     $_SESSION['idUser'] = $data[0]['idUser'];
     $_SESSION['privilegeUser'] = $data[0]['privilegesUser'];
+    //Chech the privileges of the user to redirect him
     if ($_SESSION['privilegeUser'] == 1) {
       header("Location: admin.php");
     }

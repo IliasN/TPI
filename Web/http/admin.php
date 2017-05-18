@@ -43,7 +43,7 @@ CheckAdmin();
 
 <div class="container">
 
-  <h2>Administrateur</h2>
+  <h2>Administration</h2>
   <a href="manageUsers.php">Gérer les utilisateurs</a>
   <br>
   <a href="addTitle.php">Ajouter un titre</a>
