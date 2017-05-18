@@ -4,14 +4,22 @@ require_once("php/functions.php");
 if (isset($_POST['pseudo']) && isset($_POST['pass']) && isset($_POST['passConf']) && $_POST['passConf'] == $_POST['pass']) {
   $pseudo = htmlentities($_POST['pseudo']);
   $pass = md5($_POST['passConf']);
-  //insert the data in the database
-  $query = $db->prepare("INSERT INTO users (pseudoUser,passUser,privilegesUser) VALUES (:pseudo,:pass,0)");
-  $query->execute(array(
-    'pseudo' => $pseudo,
-    'pass' => $pass
-  ));
 
-  header("Location: index.php");
+  $query = $db->prepare("SELECT * FROM users WHERE pseudoUser = :pseudo");
+  $query->execute(array(
+    'pseudo' => $pseudo
+  ));
+  $count = count()$query->fetchall());
+  if ($count == 0) {
+    //insert the data in the database
+    $query = $db->prepare("INSERT INTO users (pseudoUser,passUser,privilegesUser) VALUES (:pseudo,:pass,0)");
+    $query->execute(array(
+      'pseudo' => $pseudo,
+      'pass' => $pass
+    ));
+
+    header("Location: index.php");
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -39,18 +47,18 @@ if (isset($_POST['pseudo']) && isset($_POST['pass']) && isset($_POST['passConf']
 <div class="container">
 
   <form class="form-signin" action="inscription.php" method="post">
-          <h2 class="form-signin-heading">Connexion</h2>
-          <label for="pseudo" class="sr-only">Pseudo</label>
-          <input type="text" id="pseudo" class="form-control" placeholder="Pseudo" name="pseudo" required autofocus>
-          <label for="inputPassword" class="sr-only">Mot de passe</label>
-          <input type="password" id="inputPassword" class="form-control" placeholder="Mot de passe" name="pass" required>
-          <label for="inputPasswordConf" class="sr-only">Mot de passe</label>
-          <input type="password" id="inputPasswordConf" class="form-control" placeholder="Confirmer le mot de passe" name="passConf" required>
-          <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
-          <div class="text-center">
-            <a href="index.php">Inscription</a>
-          </div>
-        </form>
+    <h2 class="form-signin-heading">Connexion</h2>
+    <label for="pseudo" class="sr-only">Pseudo</label>
+    <input type="text" id="pseudo" class="form-control" placeholder="Pseudo" name="pseudo" required autofocus>
+    <label for="inputPassword" class="sr-only">Mot de passe</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Mot de passe" name="pass" required>
+    <label for="inputPasswordConf" class="sr-only">Mot de passe</label>
+    <input type="password" id="inputPasswordConf" class="form-control" placeholder="Confirmer le mot de passe" name="passConf" required>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
+    <div class="text-center">
+      <a href="index.php">Inscription</a>
+    </div>
+  </form>
   <footer>
     <div class="row">
       <div class="col-lg-12">
