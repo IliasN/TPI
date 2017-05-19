@@ -1,5 +1,6 @@
 <?php
 require_once("php/functions.php");
+session_start();
 //Check if the user login informations are correct
 if (isset($_POST['pseudo']) && isset($_POST['pass'])) {
   $pseudo = htmlentities($_POST['pseudo']);
@@ -13,7 +14,6 @@ if (isset($_POST['pseudo']) && isset($_POST['pass'])) {
 
   if (count($data) == 1) {
     //Put the user datas in the session for future verifications
-    session_start();
     $_SESSION['pseudoUser'] = $pseudo;
     $_SESSION['idUser'] = $data[0]['idUser'];
     $_SESSION['privilegeUser'] = $data[0]['privilegesUser'];
@@ -24,6 +24,9 @@ if (isset($_POST['pseudo']) && isset($_POST['pass'])) {
     else {
       header("Location: user.php");
     }
+  }
+  else{
+    $_SESSION['error'] = "conn";
   }
 }
 ?>
@@ -62,6 +65,10 @@ if (isset($_POST['pseudo']) && isset($_POST['pass'])) {
             <a href="inscription.php">Inscription</a>
           </div>
         </form>
+        <?php
+        if($_SESSION['error'] == "conn"){ echo "<p>Impossible de se connecter vérifiez vos informations de connexion.</p>"; $_SESSION['error'] = "";}
+        if($_SESSION['error'] == "newAcc"){ echo "<p>Votre compte a bien été créer.</p>"; $_SESSION['error'] = "";}
+        ?>
   <footer>
     <div class="row">
       <div class="col-lg-12">

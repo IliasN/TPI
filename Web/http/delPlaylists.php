@@ -14,5 +14,6 @@ if(isset($_POST['playlistToDel'])){
       'id' => $idToDel
     ));
   }
-  header("Location: manageUsers.php");
+
 }
+header("Location: manageUsers.php");

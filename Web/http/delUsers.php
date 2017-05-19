@@ -14,5 +14,6 @@ if (isset($_POST['usersToDel'])) {
       'id' => $idToDel
     ));
   }
-  header("Location: manageUsers.php");
+
 }
+header("Location: manageUsers.php");

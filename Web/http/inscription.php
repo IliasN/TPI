@@ -1,5 +1,6 @@
 <?php
 require_once("php/functions.php");
+session_start();
 //CHeck the informations to create a new account
 if (isset($_POST['pseudo']) && isset($_POST['pass']) && isset($_POST['passConf']) && $_POST['passConf'] == $_POST['pass']) {
   $pseudo = htmlentities($_POST['pseudo']);
@@ -17,9 +18,15 @@ if (isset($_POST['pseudo']) && isset($_POST['pass']) && isset($_POST['passConf']
       'pseudo' => $pseudo,
       'pass' => $pass
     ));
-
+    $_SESSION['error'] = "newAcc";
     header("Location: index.php");
   }
+  else{
+    $_SESSION['error'] = "exists";
+  }
+}
+if(isset($_POST['pass']) && isset($_POST['passConf']) && $_POST['passConf'] != $_POST['pass']){
+  $_SESSION['error'] = "passes";
 }
 ?>
 <!DOCTYPE html>
@@ -54,11 +61,15 @@ if (isset($_POST['pseudo']) && isset($_POST['pass']) && isset($_POST['passConf']
     <input type="password" id="inputPassword" class="form-control" placeholder="Mot de passe" name="pass" required>
     <label for="inputPasswordConf" class="sr-only">Mot de passe</label>
     <input type="password" id="inputPasswordConf" class="form-control" placeholder="Confirmer le mot de passe" name="passConf" required>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Inscription</button>
     <div class="text-center">
-      <a href="index.php">Inscription</a>
+      <a href="index.php">Connexion</a>
     </div>
   </form>
+  <?php
+   if($_SESSION['error'] == "exists"){ echo "<p>Ce nom de compte existe déjà.</p>"; $_SESSION['error'] = "";}
+   if($_SESSION['error'] == "passes"){ echo "<p>Veuillez confirmer votre mot de passe.</p>"; $_SESSION['error'] = "";}
+   ?>
   <footer>
     <div class="row">
       <div class="col-lg-12">
