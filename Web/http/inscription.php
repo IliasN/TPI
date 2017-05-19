@@ -9,7 +9,7 @@ if (isset($_POST['pseudo']) && isset($_POST['pass']) && isset($_POST['passConf']
   $query->execute(array(
     'pseudo' => $pseudo
   ));
-  $count = count()$query->fetchall());
+  $count = count($query->fetchall());
   if ($count == 0) {
     //insert the data in the database
     $query = $db->prepare("INSERT INTO users (pseudoUser,passUser,privilegesUser) VALUES (:pseudo,:pass,0)");

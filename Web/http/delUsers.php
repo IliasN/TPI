@@ -1,6 +1,9 @@
 <?php
 require_once("php/functions.php");
 session_start();
+
+CheckConnexion();
+CheckAdmin();
 //Check the informations
 if (isset($_POST['usersToDel'])) {
   //Go through the ids to delete and does it one by one
