@@ -67,8 +67,8 @@ if(isset($_POST['pass']) && isset($_POST['passConf']) && $_POST['passConf'] != $
     </div>
   </form>
   <?php
-   if($_SESSION['error'] == "exists"){ echo "<p>Ce nom de compte existe déjà.</p>"; $_SESSION['error'] = "";}
-   if($_SESSION['error'] == "passes"){ echo "<p>Veuillez confirmer votre mot de passe.</p>"; $_SESSION['error'] = "";}
+   if(isset($_SESSION['error']) && $_SESSION['error'] == "exists"){ echo "<p>Ce nom de compte existe déjà.</p>"; $_SESSION['error'] = "";}
+   if(isset($_SESSION['error']) && $_SESSION['error'] == "passes"){ echo "<p>Veuillez confirmer votre mot de passe.</p>"; $_SESSION['error'] = "";}
    ?>
   <footer>
     <div class="row">

@@ -69,7 +69,7 @@ $users = $query->fetchall();
         <?php } ?>
       </tbody>
     </table>
-    <input type="submit" class="btn btn-danger" value="Supprimer les utilisateur sélectionnés"/>
+    <input type="submit" class="btn btn-danger" value="Supprimer les utilisateurs sélectionnés"/>
   </form>
   <footer>
     <div class="row">

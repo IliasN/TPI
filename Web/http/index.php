@@ -66,8 +66,8 @@ if (isset($_POST['pseudo']) && isset($_POST['pass'])) {
           </div>
         </form>
         <?php
-        if($_SESSION['error'] == "conn"){ echo "<p>Impossible de se connecter vérifiez vos informations de connexion.</p>"; $_SESSION['error'] = "";}
-        if($_SESSION['error'] == "newAcc"){ echo "<p>Votre compte a bien été créer.</p>"; $_SESSION['error'] = "";}
+        if(isset($_SESSION['error']) && $_SESSION['error'] == "conn"){ echo "<p>Impossible de se connecter vérifiez vos informations de connexion.</p>"; $_SESSION['error'] = "";}
+        if(isset($_SESSION['error']) && $_SESSION['error'] == "newAcc"){ echo "<p>Votre compte a bien été créer.</p>"; $_SESSION['error'] = "";}
         ?>
   <footer>
     <div class="row">

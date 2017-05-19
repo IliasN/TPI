@@ -9,8 +9,8 @@ CheckAdmin();
 if(isset($_POST['idArtist']) && isset($_POST['idType']) && isset($_POST['titleToAdd']) && $_POST['titleToAdd'] != null && isset($_FILES['fileToAdd']) && $_FILES['fileToAdd']['type'] == 'audio/mp3'){
   $imagePath = 'Music/';
   //Generate a unique name
-  $uniquesavename=time().uniqid(rand());
-  $destFile = $imagePath . $uniquesavename . '.mp3';
+  $uniquesavename=time().uniqid(rand()) . '.mp3';
+  $destFile = $imagePath . $uniquesavename;
   $filename = $_FILES["fileToAdd"]["tmp_name"];
   //Save the file
   move_uploaded_file($filename,  $destFile);
