@@ -42,6 +42,11 @@ namespace SoundStream
         }
         #endregion
 
+        /// <summary>
+        /// Switch between connection and inscription
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void llblSwitch_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             tbxConfPass.Visible = !tbxConfPass.Visible;
@@ -58,6 +63,11 @@ namespace SoundStream
             }
         }
 
+        /// <summary>
+        /// Validate de operation inscription/connection
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAccept_Click(object sender, EventArgs e)
         {
             if (btnAccept.Text == "Connexion")
