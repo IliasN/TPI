@@ -52,6 +52,13 @@ namespace SoundStream
         #region Methods
 
         #region Constructor
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="pAdress">Database ip adress</param>
+        /// <param name="pUser">Username for the database</param>
+        /// <param name="pPass">The password of the account</param>
+        /// <param name="pDatabase">The name of the database</param>
         public Db(string pAdress, string pUser,string pPass,string pDatabase)
         {
             this.Connection = null;
