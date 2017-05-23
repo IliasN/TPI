@@ -38,7 +38,15 @@ namespace SoundStream
         public frmConnection()
         {
             InitializeComponent();
-            this.Database = new Db("127.0.0.1", "root", "", "tpi");
+            try
+            {
+                this.Database = new Db("127.0.0.1", "root", "", "tpi");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Impossible de se connecter à la base de données. Veuillez réessayer.");
+                Environment.Exit(0);
+            }
         }
         #endregion
 
