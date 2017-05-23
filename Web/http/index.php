@@ -1,4 +1,9 @@
 <?php
+/*
+Auteur : N'hairi Ilias
+Version : 1.0
+Date : 23.05.2017
+*/
 require_once("php/functions.php");
 session_start();
 //Check if the user login informations are correct
