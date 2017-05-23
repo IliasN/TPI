@@ -61,7 +61,7 @@ CheckAdmin();
     <label for="mp3File">Musique (.mp3) :</label>
     <input type="file" class="form-control-file" id="mp3File" name="fileToAdd" aria-describedby="fileHelp" accept=".mp3,audio/*">
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary">Ajouter</button>
 </form>
 
   <footer>
