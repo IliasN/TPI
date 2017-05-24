@@ -3,13 +3,14 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mer. 10 mai 2017 à 15:53
+-- Généré le :  ven. 19 mai 2017 à 14:43
 -- Version du serveur :  5.7.17
 -- Version de PHP :  5.6.30
 
 DROP DATABASE IF EXISTS tpi;
 CREATE DATABASE tpi;
 USE tpi;
+
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -42,7 +43,10 @@ CREATE TABLE `artists` (
 --
 
 INSERT INTO `artists` (`idArtist`, `nameArtist`) VALUES
-(1, 'Artiste inconnu');
+(1, 'Artiste inconnu'),
+(2, 'KaiEngel'),
+(3, 'The Grammar Club'),
+(4, 'Rue de prague');
 
 -- --------------------------------------------------------
 
@@ -60,8 +64,11 @@ CREATE TABLE `contain` (
 --
 
 INSERT INTO `contain` (`idPlaylist`, `idMusic`) VALUES
+(2, 1),
 (1, 2),
-(1, 3);
+(2, 2),
+(1, 3),
+(3, 3);
 
 -- --------------------------------------------------------
 
@@ -80,7 +87,8 @@ CREATE TABLE `favorites` (
 
 INSERT INTO `favorites` (`idUser`, `idMusic`) VALUES
 (1, 2),
-(2, 1);
+(2, 1),
+(8, 2);
 
 -- --------------------------------------------------------
 
@@ -103,7 +111,10 @@ CREATE TABLE `musics` (
 INSERT INTO `musics` (`idMusic`, `titleMusic`, `idType`, `idArtist`, `fileName`) VALUES
 (1, 'Tendresse', 2, 1, 'Tendresse.mp3'),
 (2, 'Gestation', 2, 1, 'Gestation.mp3'),
-(3, 'Forest', 2, 1, 'Forest.mp3');
+(3, 'Forest', 2, 1, 'Forest.mp3'),
+(9, 'The run', 2, 2, '149519674412541591ee448a60ee.mp3'),
+(10, 'Ignite', 4, 4, '149519675924643591ee457ef68c.mp3'),
+(11, 'Plastic Submarin', 5, 3, '14951967735824591ee465b46d4.mp3');
 
 -- --------------------------------------------------------
 
@@ -122,7 +133,9 @@ CREATE TABLE `playlists` (
 --
 
 INSERT INTO `playlists` (`idPlaylist`, `namePlaylist`, `idUser`) VALUES
-(1, 'Démonstration', 2);
+(1, 'Démonstration', 2),
+(2, 'Demo', 8),
+(3, 'Demo2', 8);
 
 -- --------------------------------------------------------
 
@@ -141,7 +154,10 @@ CREATE TABLE `types` (
 
 INSERT INTO `types` (`idType`, `labelType`) VALUES
 (1, 'Reggea'),
-(2, 'Classique');
+(2, 'Classique'),
+(3, 'Electro'),
+(4, 'Rock'),
+(5, 'Hip Hop');
 
 -- --------------------------------------------------------
 
@@ -163,9 +179,11 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`idUser`, `pseudoUser`, `passUser`, `privilegesUser`) VALUES
 (1, 'Admin', '0ce3266d4eb71ad50f7a90aee6d21dcd', 1),
 (2, 'Ilias', '0ce3266d4eb71ad50f7a90aee6d21dcd', 0),
-(5, 'Test', '0ce3266d4eb71ad50f7a90aee6d21dcd', 0),
 (6, 'Dylan', '0ce3266d4eb71ad50f7a90aee6d21dcd', 0),
-(7, 'David', '0ce3266d4eb71ad50f7a90aee6d21dcd', 0);
+(7, 'David', '0ce3266d4eb71ad50f7a90aee6d21dcd', 0),
+(8, 'Demo', '0ce3266d4eb71ad50f7a90aee6d21dcd', 0),
+(9, 'Miguel', '444bcb3a3fcf8389296c49467f27e1d6', 0),
+(10, 'Tom', '0ce3266d4eb71ad50f7a90aee6d21dcd', 0);
 
 --
 -- Index pour les tables déchargées
@@ -225,27 +243,27 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `artists`
 --
 ALTER TABLE `artists`
-  MODIFY `idArtist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idArtist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `musics`
 --
 ALTER TABLE `musics`
-  MODIFY `idMusic` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idMusic` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT pour la table `playlists`
 --
 ALTER TABLE `playlists`
-  MODIFY `idPlaylist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idPlaylist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `types`
 --
 ALTER TABLE `types`
-  MODIFY `idType` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idType` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- Contraintes pour les tables déchargées
 --
@@ -254,8 +272,8 @@ ALTER TABLE `users`
 -- Contraintes pour la table `contain`
 --
 ALTER TABLE `contain`
-  ADD CONSTRAINT `FK_contain_idMusic` FOREIGN KEY (`idMusic`) REFERENCES `musics` (`idMusic`),
-  ADD CONSTRAINT `FK_contain_idPlaylist` FOREIGN KEY (`idPlaylist`) REFERENCES `playlists` (`idPlaylist`);
+  ADD CONSTRAINT `FK_contain_idMusic` FOREIGN KEY (`idMusic`) REFERENCES `musics` (`idMusic`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_contain_idPlaylist` FOREIGN KEY (`idPlaylist`) REFERENCES `playlists` (`idPlaylist`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `musics`
@@ -268,7 +286,7 @@ ALTER TABLE `musics`
 -- Contraintes pour la table `playlists`
 --
 ALTER TABLE `playlists`
-  ADD CONSTRAINT `FK_playlists_idUser` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`);
+  ADD CONSTRAINT `FK_playlists_idUser` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

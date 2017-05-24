@@ -1,4 +1,9 @@
 <?php
+/*
+Author : N'hairi Ilias
+Version : 1.0
+Date : 23.05.2017
+*/
 require_once("php/functions.php");
 session_start();
 //CHeck the informations to create a new account
@@ -54,7 +59,7 @@ if(isset($_POST['pass']) && isset($_POST['passConf']) && $_POST['passConf'] != $
 <div class="container">
 
   <form class="form-signin" action="inscription.php" method="post">
-    <h2 class="form-signin-heading">Connexion</h2>
+    <h2 class="form-signin-heading">Inscription</h2>
     <label for="pseudo" class="sr-only">Pseudo</label>
     <input type="text" id="pseudo" class="form-control" placeholder="Pseudo" name="pseudo" required autofocus>
     <label for="inputPassword" class="sr-only">Mot de passe</label>
