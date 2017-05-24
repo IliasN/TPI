@@ -79,7 +79,8 @@ namespace SoundStream
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show(ex.ToString(),"Erreur " + ex.Source);
+                System.Windows.Forms.MessageBox.Show("Impossible de se connecter à la base de données. Veuillez réessayer.");
+                Environment.Exit(0);
             }
         }
         #endregion

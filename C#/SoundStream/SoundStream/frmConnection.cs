@@ -43,15 +43,7 @@ namespace SoundStream
         public frmConnection()
         {
             InitializeComponent();
-            try
-            {
-                this.Database = new Db("127.0.0.1", "root", "", "tpi");
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Impossible de se connecter à la base de données. Veuillez réessayer.");
-                Environment.Exit(0);
-            }
+            this.Database = new Db("127.0.0.1", "root", "", "tpi");
         }
         #endregion
 
@@ -64,8 +56,11 @@ namespace SoundStream
         {
             tbxConfPass.Visible = !tbxConfPass.Visible;
             lblConfirmPass.Visible = !lblConfirmPass.Visible;
-            if(btnAccept.Text == "Connexion")
+            if (btnAccept.Text == "Connexion")
             {
+                tbxName.Clear();
+                tbxPass.Clear();
+                tbxConfPass.Clear();
                 btnAccept.Text = "Inscription";
                 llblSwitch.Text = "Connexion";
             }
@@ -86,15 +81,15 @@ namespace SoundStream
             if (btnAccept.Text == "Connexion")
             {
                 User testUser = this.Database.TestConnection(tbxName.Text, PasswordHash(tbxPass.Text));
-                    
-                    if (testUser != null)
-                    {
-                        frmMain mainWindow = new frmMain(this.Database, testUser);
-                        this.Hide();
-                        mainWindow.ShowDialog();
-                        return;
-                    }
-                    MessageBox.Show("Impossible de se connecter vérifiez vos identifiant.");
+
+                if (testUser != null)
+                {
+                    frmMain mainWindow = new frmMain(this.Database, testUser);
+                    this.Hide();
+                    mainWindow.ShowDialog();
+                    return;
+                }
+                MessageBox.Show("Impossible de se connecter vérifiez vos identifiant.");
             }
             else
             {
@@ -137,5 +132,7 @@ namespace SoundStream
         }
 
         #endregion
+
+
     }
 }

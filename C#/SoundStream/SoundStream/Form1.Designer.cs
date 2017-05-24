@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.tcMain = new System.Windows.Forms.TabControl();
             this.tpPlaylists = new System.Windows.Forms.TabPage();
             this.btnDeletePlaylist = new System.Windows.Forms.Button();
@@ -379,7 +380,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(993, 593);
+            this.ClientSize = new System.Drawing.Size(989, 589);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.lblVolumeValue);
             this.Controls.Add(this.lblTime);
@@ -393,7 +394,12 @@
             this.Controls.Add(this.btnPause);
             this.Controls.Add(this.btnPlay);
             this.Controls.Add(this.tcMain);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(1009, 632);
+            this.MinimumSize = new System.Drawing.Size(1009, 632);
             this.Name = "frmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SoundStream";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.tcMain.ResumeLayout(false);

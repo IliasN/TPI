@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmConnection));
             this.tbxName = new System.Windows.Forms.TextBox();
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnAccept = new System.Windows.Forms.Button();
@@ -137,7 +138,12 @@
             this.Controls.Add(this.btnAccept);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.tbxName);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(513, 347);
+            this.MinimumSize = new System.Drawing.Size(513, 347);
             this.Name = "frmConnection";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SoundStream";
             this.ResumeLayout(false);
             this.PerformLayout();
