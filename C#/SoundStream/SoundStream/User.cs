@@ -6,6 +6,9 @@ Date : 23.05.2017
 
 namespace SoundStream
 {
+    /// <summary>
+    /// Store the user data
+    /// </summary>
     public class User
     {
         #region Fields

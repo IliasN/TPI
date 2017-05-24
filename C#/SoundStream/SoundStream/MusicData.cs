@@ -6,6 +6,9 @@ Date : 23.05.2017
 
 namespace SoundStream
 {
+    /// <summary>
+    /// Store the data of the musics
+    /// </summary>
     public class MusicData
     {
         #region Fields

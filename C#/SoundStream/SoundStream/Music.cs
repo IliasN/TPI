@@ -8,7 +8,7 @@ using WMPLib;
 namespace SoundStream
 {
     /// <summary>
-    /// La classe musique sert à créer un lecteur et à lire la musique depuis un URL http
+    /// This class handles the playing of the music via web links
     /// </summary>
     public class Music
     {
@@ -35,7 +35,7 @@ namespace SoundStream
         #endregion
 
         /// <summary>
-        /// Lance le media
+        /// Start the media
         /// </summary>
         public void Play()
         {
@@ -43,7 +43,7 @@ namespace SoundStream
         }
 
         /// <summary>
-        /// Met le media en pause en cours
+        /// Pauses the media
         /// </summary>
         public void Pause()
         {
@@ -51,7 +51,7 @@ namespace SoundStream
         }
 
         /// <summary>
-        /// Stop le media en cours
+        /// Stop the media
         /// </summary>
         public void Stop()
         {
@@ -59,7 +59,7 @@ namespace SoundStream
         }
 
         /// <summary>
-        /// Règle le volume 
+        /// Set the volume 
         /// </summary>
         /// <param name="value">Valeur du volume (0-100)</param>
         public void SetVolume(int value)
@@ -68,7 +68,7 @@ namespace SoundStream
         }
 
         /// <summary>
-        /// Entre l'URL du média à lire
+        /// Change the url to get the song
         /// </summary>
         /// <param name="pUrl">URL du média</param>
         public void SetUrl(string pUrl)
@@ -78,27 +78,27 @@ namespace SoundStream
         }
 
         /// <summary>
-        /// Récupère la durée du média
+        /// Get the media duration
         /// </summary>
-        /// <returns>La durée du média en secondes</returns>
+        /// <returns>the media duration in secondes</returns>
         public int GetDuration()
         {
             return (int)this.Player.currentMedia.duration;
         }
 
         /// <summary>
-        /// Récupère la position du lecteur dans le média
+        /// Get the position of the media
         /// </summary>
-        /// <returns>la position du lecteur dans le média en secondes</returns>
+        /// <returns>the position of the media in secondes</returns>
         public int GetCurrentPosition()
         {
             return (int)this.Player.controls.currentPosition;
         }
 
         /// <summary>
-        /// Change la position du lecteur dans le média
+        /// Change the position of the media
         /// </summary>
-        /// <param name="pCurrentToSet"></param>
+        /// <param name="pCurrentToSet">The new position to set in secondes</param>
         public void SetCurrentPosition(int pCurrentToSet)
         {
             this.Player.controls.currentPosition = pCurrentToSet;

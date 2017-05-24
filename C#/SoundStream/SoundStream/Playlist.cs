@@ -6,6 +6,9 @@ Date : 23.05.2017
 
 namespace SoundStream
 {
+    /// <summary>
+    /// Store the data of the playlists
+    /// </summary>
     public class Playlist
     {
         #region Fields
