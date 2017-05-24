@@ -3,11 +3,6 @@ Author : N'hairi Ilias
 Version : 1.0
 Date : 23.05.2017
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WMPLib;
 
 namespace SoundStream
