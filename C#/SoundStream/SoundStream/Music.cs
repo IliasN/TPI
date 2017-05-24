@@ -1,5 +1,5 @@
 ﻿/*
-Auteur : N'hairi Ilias
+Author : N'hairi Ilias
 Version : 1.0
 Date : 23.05.2017
 */
